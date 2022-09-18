@@ -1,0 +1,81 @@
+{
+    parserClass='dev.kdl.lang.parser.KdlParser'
+
+    implements='dev.kdl.lang.psi.ext.KdlElement'
+    extends='dev.kdl.lang.psi.ext.KdlElementImpl'
+
+    psiClassPrefix='KdlPsi'
+    psiImplClassSuffix='Impl'
+    psiPackage='dev.kdl.lang.psi'
+    psiImplPackage='dev.kdl.lang.psi.impl'
+
+    elementTypeHolderClass='dev.kdl.lang.psi.ext.KdlElementTypes'
+    elementTypeClass='dev.kdl.lang.lexer.KdlElementType'
+    tokenTypeClass='dev.kdl.lang.lexer.KdlTokenType'
+
+    tokens = [
+        SLASHDASH='/-'
+        SLASH='/'
+        BACKSLASH='\'
+        SEMI=";"
+        COMMA=","
+        L_BRACE="{"
+        R_BRACE="}"
+        L_PAREN="("
+        R_PAREN=")"
+        L_BRACK="["
+        R_BRACK="]"
+        LESS_THEN="<"
+        MORE_THEN=">"
+        EQ="="
+        QUOTE="\""
+
+        NULL_LITERAL="null"
+        TRUE_LITERAL="true"
+        FALSE_LITERAL="false"
+
+        DECIMAL_LITERAL
+        HEX_LITERAL
+        OCTAL_LITERAL
+        BINARY_LITERAL
+
+        RAW_STRING_LITERAL
+        STRING_LITERAL
+
+        BARE_IDENTIFIER
+
+        NEWLINE
+        UNICODE_SPACE
+        BOM
+        SINGLE_LINE_COMMENT
+        MULTI_LINE_COMMENT
+    ]
+}
+
+File ::= nodes
+
+nodes ::= linespace* (node-block linespace*)*
+
+node-block ::= ('/-' node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator
+node-prop-or-arg ::= ('/-' node-space*)? (prop | arg)
+node-children ::= ('/-' node-space*)? '{' nodes '}'
+private node-space ::= ws* escline ws* | ws+
+private node-terminator ::= SINGLE_LINE_COMMENT | NEWLINE | ';' | <<eof>>
+
+identifier ::= string | BARE_IDENTIFIER
+arg ::= value
+prop ::= identifier '=' value
+value ::= type? literal
+literal ::= (string | number | boolean | null)
+type ::= '(' identifier ')'
+
+string ::= RAW_STRING_LITERAL | STRING_LITERAL
+number ::= DECIMAL_LITERAL | HEX_LITERAL | OCTAL_LITERAL | BINARY_LITERAL
+boolean ::= 'true' | 'false'
+null ::= 'null'
+
+private escline ::= '\' ws* (SINGLE_LINE_COMMENT | NEWLINE)
+
+private linespace ::= NEWLINE | ws | SINGLE_LINE_COMMENT
+
+private ws ::= BOM | UNICODE_SPACE | MULTI_LINE_COMMENT

@@ -1,0 +1,26 @@
+<idea-plugin>
+    <id>dev.kdl</id>
+    <name>KDL Lang Support</name>
+    <vendor url="https://kdl.dev/">KDL</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+<!--        <applicationService serviceImplementation="dev.kdl.services.MyApplicationService"/>-->
+<!--        <projectService serviceImplementation="dev.kdl.services.MyProjectService"/>-->
+        <fileType name="KDL"
+                  extensions="kdl"
+                  language="KDL"
+                  implementationClass="dev.kdl.lang.KdlFileType" />
+        <lang.parserDefinition language="KDL"
+                               implementationClass="dev.kdl.lang.parser.KdlParserDefinition" />
+        <lang.syntaxHighlighterFactory
+            language="KDL"
+            implementationClass="dev.kdl.lang.highlighter.KdlSyntaxHighlighterFactory"/>
+    </extensions>
+
+    <applicationListeners>
+<!--        <listener class="dev.kdl.listeners.MyProjectManagerListener"-->
+<!--                  topic="com.intellij.openapi.project.ProjectManagerListener"/>-->
+    </applicationListeners>
+</idea-plugin>
