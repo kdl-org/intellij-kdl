@@ -17,7 +17,7 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
     override fun getHighlightingLexer(): Lexer = KdlFlexAdapter()
 
     override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> = when (tokenType) {
-        KdlElementTypes.IDENTIFIER -> IDENTIFIER_KEYS
+        KdlElementTypes.BARE_IDENTIFIER -> BARE_IDENTIFIER_KEYS
         KdlElementTypes.COMMA -> COMMA_KEYS
         SEMI -> SEMICOLON_KEYS
         NULL_LITERAL, TRUE_LITERAL, FALSE_LITERAL -> KEYWORD_KEYS
@@ -27,14 +27,14 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
         MULTI_LINE_COMMENT -> BLOCK_COMMENT_KEYS
         SINGLE_LINE_COMMENT -> LINE_COMMENT_KEYS
         DECIMAL_LITERAL, HEX_LITERAL, OCTAL_LITERAL, BINARY_LITERAL -> NUMBER_KEYS
-        STRING_LITERAL -> STRING_KEYS
+        STRING_LITERAL, RAW_STRING_LITERAL -> STRING_KEYS
         TokenType.BAD_CHARACTER -> BAD_CHAR_KEYS
         else -> EMPTY_KEYS
     }
 
     companion object {
         private val KEYWORD = createTextAttributesKey("KDL_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
-        private val IDENTIFIER = createTextAttributesKey("KDL_IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER)
+        private val BARE_IDENTIFIER = createTextAttributesKey("KDL_IDENTIFIER", DefaultLanguageHighlighterColors.KEYWORD)
         private val COMMA = createTextAttributesKey("KDL_COMMA", DefaultLanguageHighlighterColors.COMMA)
         private val SEMICOLON = createTextAttributesKey("KDL_SEMICOLON", DefaultLanguageHighlighterColors.SEMICOLON)
         private val PARENTHESES = createTextAttributesKey("KDL_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES)
@@ -48,7 +48,7 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
 
         private val BAD_CHAR_KEYS = arrayOf(BAD_CHARACTER)
         private val KEYWORD_KEYS = arrayOf(KEYWORD)
-        private val IDENTIFIER_KEYS = arrayOf(IDENTIFIER)
+        private val BARE_IDENTIFIER_KEYS = arrayOf(BARE_IDENTIFIER)
         private val COMMA_KEYS = arrayOf(COMMA)
         private val SEMICOLON_KEYS = arrayOf(SEMICOLON)
         private val PARENTHESES_KEYS = arrayOf(PARENTHESES)
