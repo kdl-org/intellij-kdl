@@ -163,7 +163,7 @@ BARE_IDENTIFIER_KILLER={NEWLINE} |
 <YYINITIAL> {
     {NEWLINE}                   { return NEWLINE; }
     {BOM}                       { return BOM; }
-    {UNICODE_SPACE}             { return UNICODE_SPACE; }
+    {UNICODE_SPACE}+            { return UNICODE_SPACE; }
 
     "//"                        { resetMatch(IN_SINGLE_LINE_COMMENT); }
     "/*"                        { resetMatch(IN_MULTILINE_COMMENT); }
@@ -219,7 +219,7 @@ BARE_IDENTIFIER_KILLER={NEWLINE} |
 
 <IN_SINGLE_LINE_COMMENT> {
     <<EOF>>   { yybegin(YYINITIAL); return SINGLE_LINE_COMMENT; }
-    {NEWLINE} { yybegin(YYINITIAL); return SINGLE_LINE_COMMENT; }
+    {NEWLINE} { resetMatch(YYINITIAL); return SINGLE_LINE_COMMENT; }
     [^]       { }
 }
 

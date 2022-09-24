@@ -28,9 +28,9 @@ public class KdlPsiNodeChildrenImpl extends KdlElementImpl implements KdlPsiNode
   }
 
   @Override
-  @NotNull
+  @Nullable
   public KdlPsiNodes getNodes() {
-    return findNotNullChildByClass(KdlPsiNodes.class);
+    return findChildByClass(KdlPsiNodes.class);
   }
 
 }

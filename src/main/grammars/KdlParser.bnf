@@ -47,8 +47,8 @@
         NEWLINE
         UNICODE_SPACE
         BOM
-        SINGLE_LINE_COMMENT
-        MULTI_LINE_COMMENT
+        SINGLE_LINE_COMMENT="SINGLE_LINE_COMMENT"
+        MULTI_LINE_COMMENT="MULTI_LINE_COMMENT"
     ]
 }
 
@@ -58,9 +58,13 @@ nodes ::= linespace* (node-block linespace*)*
 
 node-block ::= ('/-' node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator
 node-prop-or-arg ::= ('/-' node-space*)? (prop | arg)
-node-children ::= ('/-' node-space*)? '{' nodes '}'
+node-children ::= ('/-' node-space*)? '{' node-children-inner? '}' { pin=2 }
+
+private node-children-inner ::= !'}' nodes &'}' {pin=1 recoverWhile=node-children-recover}
+private node-children-recover ::= !'}'
+
 private node-space ::= ws* escline ws* | ws+
-private node-terminator ::= SINGLE_LINE_COMMENT | NEWLINE | ';' | <<eof>>
+private node-terminator ::= NEWLINE | ';' | <<eof>>
 
 identifier ::= string | BARE_IDENTIFIER
 arg ::= value
@@ -74,8 +78,8 @@ number ::= DECIMAL_LITERAL | HEX_LITERAL | OCTAL_LITERAL | BINARY_LITERAL
 boolean ::= 'true' | 'false'
 null ::= 'null'
 
-private escline ::= '\' ws* (SINGLE_LINE_COMMENT | NEWLINE)
+private escline ::= '\' ws* NEWLINE
 
-private linespace ::= NEWLINE | ws | SINGLE_LINE_COMMENT
+private linespace ::= NEWLINE | ws
 
-private ws ::= BOM | UNICODE_SPACE | MULTI_LINE_COMMENT
+private ws ::= BOM | UNICODE_SPACE

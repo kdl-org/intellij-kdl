@@ -8,7 +8,7 @@ import dev.kdl.lang.psi.ext.KdlElement;
 
 public interface KdlPsiNodeChildren extends KdlElement {
 
-  @NotNull
+  @Nullable
   KdlPsiNodes getNodes();
 
 }
