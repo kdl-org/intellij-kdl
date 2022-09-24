@@ -198,7 +198,7 @@ BARE_IDENTIFIER_KILLER={NEWLINE} |
           zzShaStride          = yylength() - 2;
     }
 
-    ~{BARE_IDENTIFIER_KILLER}  {
+    ~{BARE_IDENTIFIER_KILLER} | [^] {
           zzPostponedMarkedPos = zzStartRead;
           yypushback(yylength());
           yybegin(IN_BARE_IDENTIFIER);
