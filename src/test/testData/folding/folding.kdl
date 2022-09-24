@@ -1,0 +1,5 @@
+node {<fold text='...'>
+    node2 {<fold text='...'>
+        test "a"
+    </fold>}
+</fold>}
