@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized.Parameter
 import java.io.File
 
 @Suppress("RedundantVisibilityModifier")
-@TestDataPath("\$CONTENT_ROOT/testSuite")
+@TestDataPath("\$CONTENT_ROOT/testData/testSuite")
 @RunWith(Parameterized::class)
 class KdlTestSuite : BasePlatformTestCase() {
 
@@ -24,7 +24,7 @@ class KdlTestSuite : BasePlatformTestCase() {
     @JvmField
     public var expectedKdl: String? = null
 
-    override fun getTestDataPath() = "src/test/testSuite"
+    override fun getTestDataPath() = "src/test/testData/testSuite"
 
     @Test
     fun testCase() {

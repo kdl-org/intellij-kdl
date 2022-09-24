@@ -142,7 +142,7 @@ tasks {
     val updateTestSuite by registering {
         doLast {
             val repoPath = buildDir.resolve("testSuite")
-            val testsPath = projectDir.resolve("src/test/testSuite")
+            val testsPath = projectDir.resolve("src/test/testData/testSuite")
             mkdir(repoPath)
             Grgit.clone {
                 dir = repoPath
