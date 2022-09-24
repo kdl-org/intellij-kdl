@@ -131,9 +131,6 @@ UNICODE_SPACE=\u0009 |
     \u205F |
     \u3000
 
-SINGLE_LINE_COMMENT=\/\/ ~{NEWLINE}
-MULTI_LINE_COMMENT_START="/*"
-
 BARE_IDENTIFIER_KILLER={NEWLINE} |
     {BOM} |
     {UNICODE_SPACE} |
@@ -153,6 +150,7 @@ BARE_IDENTIFIER_KILLER={NEWLINE} |
     {QUOTE}
 
 
+%state IN_SINGLE_LINE_COMMENT
 %state IN_MULTILINE_COMMENT
 %state IN_RAW_STRING
 %state IN_BARE_IDENTIFIER
@@ -167,8 +165,8 @@ BARE_IDENTIFIER_KILLER={NEWLINE} |
     {BOM}                       { return BOM; }
     {UNICODE_SPACE}             { return UNICODE_SPACE; }
 
-    {SINGLE_LINE_COMMENT}       { return SINGLE_LINE_COMMENT; }
-    {MULTI_LINE_COMMENT_START}  { resetMatch(IN_MULTILINE_COMMENT); }
+    "//"                        { resetMatch(IN_SINGLE_LINE_COMMENT); }
+    "/*"                        { resetMatch(IN_MULTILINE_COMMENT); }
 
     "/-"                        { return SLASHDASH; }
     {SLASH}                     { return SLASH; }
@@ -217,6 +215,12 @@ BARE_IDENTIFIER_KILLER={NEWLINE} |
     <<EOF>> { zzNestedCommentLevel = 0; return imbueBlockComment(); }
 
     [^]     { }
+}
+
+<IN_SINGLE_LINE_COMMENT> {
+    <<EOF>>   { yybegin(YYINITIAL); return SINGLE_LINE_COMMENT; }
+    {NEWLINE} { yybegin(YYINITIAL); return SINGLE_LINE_COMMENT; }
+    [^]       { }
 }
 
 <IN_RAW_STRING> {
