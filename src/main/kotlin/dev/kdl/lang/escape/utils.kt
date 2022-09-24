@@ -17,7 +17,8 @@ fun unescapeString(rawValue: String): String {
 
 private fun tokenize(lexer: KdlEscapeLexer): Sequence<Pair<EscapeType, CharSequence>> =
     generateSequence {
-       lexer.advance() to lexer.yytext()
+        val escapeType = lexer.advance() ?: return@generateSequence null
+        escapeType to lexer.yytext()
     }
 
 
