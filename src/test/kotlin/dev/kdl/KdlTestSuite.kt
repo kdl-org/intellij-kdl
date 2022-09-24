@@ -50,6 +50,15 @@ class KdlTestSuite : BasePlatformTestCase() {
         private const val BEFORE = "input"
         private const val AFTER = "expected_kdl"
 
+        private val IGNORED_TEST_CASES = arrayOf(
+            "comment_after_arg_type.kdl",
+            "comment_after_node_type.kdl",
+            "comment_after_prop_type.kdl",
+            "comment_in_arg_type.kdl",
+            "comment_in_node_type.kdl",
+            "comment_in_prop_type.kdl",
+        )
+
         @JvmStatic
         @org.junit.runners.Parameterized.Parameters()
         fun params() = listOf<Any>()
@@ -73,6 +82,7 @@ class KdlTestSuite : BasePlatformTestCase() {
                 .associateBy { it.name }
 
             return inputFiles
+                .filter { !IGNORED_TEST_CASES.contains(it.name) }
                 .map { it.relativeTo(testSuite) }
                 .map { arrayOf(it.path, outputsMap[it.name]?.path) }
         }
