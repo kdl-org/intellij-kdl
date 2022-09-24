@@ -21,9 +21,24 @@ import static dev.kdl.lang.psi.ext.KdlElementTypes.*;
     * match
     */
   private int zzPostponedMarkedPos = -1;
+
+  /**
+    * Dedicated nested-comment level counter
+    */
+  private int zzNestedCommentLevel = 0;
 %}
 
 %{
+  IElementType imbueBlockComment() {
+      assert(zzNestedCommentLevel == 0);
+      yybegin(YYINITIAL);
+
+      zzStartRead = zzPostponedMarkedPos;
+      zzPostponedMarkedPos = -1;
+
+      return MULTI_LINE_COMMENT;
+  }
+
   IElementType imbueRawLiteral() {
       zzStartRead = zzPostponedMarkedPos;
       zzShaStride = -1;
@@ -153,7 +168,7 @@ BARE_IDENTIFIER_KILLER={NEWLINE} |
     {UNICODE_SPACE}             { return UNICODE_SPACE; }
 
     {SINGLE_LINE_COMMENT}       { return SINGLE_LINE_COMMENT; }
-    {MULTI_LINE_COMMENT_START}  { yybegin(IN_MULTILINE_COMMENT); }
+    {MULTI_LINE_COMMENT_START}  { resetMatch(IN_MULTILINE_COMMENT); }
 
     "/-"                        { return SLASHDASH; }
     {SLASH}                     { return SLASH; }
@@ -190,14 +205,18 @@ BARE_IDENTIFIER_KILLER={NEWLINE} |
     }
 }
 
-// TODO how is **/ parsed? and why is official grammar so complicated?
 <IN_MULTILINE_COMMENT> {
-    "*"                     { }
-    [^"*/"]                 { }
-    "*/"                    {
-        yybegin(YYINITIAL);
-        return MULTI_LINE_COMMENT;
-    }
+    "/*"    { if (zzNestedCommentLevel++ == 0)
+                zzPostponedMarkedPos = zzStartRead;
+            }
+
+    "*/"    { if (--zzNestedCommentLevel == 0)
+                return imbueBlockComment();
+            }
+
+    <<EOF>> { zzNestedCommentLevel = 0; return imbueBlockComment(); }
+
+    [^]     { }
 }
 
 <IN_RAW_STRING> {
