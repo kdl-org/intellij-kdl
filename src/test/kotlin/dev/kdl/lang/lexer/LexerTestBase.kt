@@ -44,9 +44,9 @@ abstract class LexerTestBase: LexerTestCase() {
     }
 
     private fun pathToSourceTestFile(): Path =
-        Paths.get("src/test/resources/${dirPath}/${getTestName(true)}.$testFileExtension")
+        Paths.get("src/test/testData/${dirPath}/${getTestName(true)}.$testFileExtension")
 
     private fun pathToGoldTestFile(): Path =
-        Paths.get("src/test/resources/${dirPath}/${getTestName(true)}.txt")
+        Paths.get("src/test/testData/${dirPath}/${getTestName(true)}.txt")
 
 }
