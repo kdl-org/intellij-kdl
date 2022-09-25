@@ -106,6 +106,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
   // NEWLINE | ws
   static boolean linespace(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "linespace")) return false;
+    if (!nextTokenIs(builder_, "", NEWLINE, UNICODE_SPACE)) return false;
     boolean result_;
     result_ = consumeToken(builder_, NEWLINE);
     if (!result_) result_ = ws(builder_, level_ + 1);
@@ -419,6 +420,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
   // ws* escline ws* | ws+
   static boolean node_space(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "node_space")) return false;
+    if (!nextTokenIs(builder_, "", BACKSLASH, UNICODE_SPACE)) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = node_space_0(builder_, level_ + 1);
@@ -631,14 +633,9 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BOM | UNICODE_SPACE
+  // UNICODE_SPACE
   static boolean ws(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "ws")) return false;
-    if (!nextTokenIs(builder_, "", BOM, UNICODE_SPACE)) return false;
-    boolean result_;
-    result_ = consumeToken(builder_, BOM);
-    if (!result_) result_ = consumeToken(builder_, UNICODE_SPACE);
-    return result_;
+    return consumeToken(builder_, UNICODE_SPACE);
   }
 
 }

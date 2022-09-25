@@ -28,7 +28,6 @@ public interface KdlElementTypes {
   IElementType BACKSLASH = new KdlTokenType("\\");
   IElementType BARE_IDENTIFIER = new KdlTokenType("BARE_IDENTIFIER");
   IElementType BINARY_LITERAL = new KdlTokenType("BINARY_LITERAL");
-  IElementType BOM = new KdlTokenType("BOM");
   IElementType COMMA = new KdlTokenType(",");
   IElementType DECIMAL_LITERAL = new KdlTokenType("DECIMAL_LITERAL");
   IElementType EQ = new KdlTokenType("=");

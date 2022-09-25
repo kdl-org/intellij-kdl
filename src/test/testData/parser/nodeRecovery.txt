@@ -39,5 +39,5 @@ FILE(0,51)
                     KdlPsiNodesImpl(NODES)(49,50)
                       PsiElement(NEWLINE)('\n')(49,50)
                     PsiElement(})('}')(50,51)
-              PsiErrorElement:';', <node block>, BOM, NEWLINE, UNICODE_SPACE, '\' or '}' expected(51,51)
+              PsiErrorElement:';', <node block>, NEWLINE, UNICODE_SPACE, '\' or '}' expected(51,51)
                 <empty list>

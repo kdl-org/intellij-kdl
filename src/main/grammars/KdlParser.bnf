@@ -46,7 +46,6 @@
 
         NEWLINE
         UNICODE_SPACE
-        BOM
         SINGLE_LINE_COMMENT="SINGLE_LINE_COMMENT"
         MULTI_LINE_COMMENT="MULTI_LINE_COMMENT"
     ]
@@ -82,4 +81,4 @@ private escline ::= '\' ws* NEWLINE
 
 private linespace ::= NEWLINE | ws
 
-private ws ::= BOM | UNICODE_SPACE
+private ws ::= UNICODE_SPACE

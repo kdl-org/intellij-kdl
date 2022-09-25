@@ -110,8 +110,6 @@ NEWLINE=\u000D |
     \u2028 |
     \u2029
 
-BOM=\uFEFF
-
 UNICODE_SPACE=\u0009 |
     \u0020 |
     \u00A0 |
@@ -132,7 +130,6 @@ UNICODE_SPACE=\u0009 |
     \u3000
 
 BARE_IDENTIFIER_KILLER={NEWLINE} |
-    {BOM} |
     {UNICODE_SPACE} |
     {SLASH} |
     {BACKSLASH} |
@@ -162,7 +159,6 @@ BARE_IDENTIFIER_KILLER={NEWLINE} |
 
 <YYINITIAL> {
     {NEWLINE}                   { return NEWLINE; }
-    {BOM}                       { return BOM; }
     {UNICODE_SPACE}+            { return UNICODE_SPACE; }
 
     "//"                        { resetMatch(IN_SINGLE_LINE_COMMENT); }
