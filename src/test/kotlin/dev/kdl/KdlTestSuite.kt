@@ -82,6 +82,7 @@ class KdlTestSuite : BasePlatformTestCase() {
                 .associateBy { it.name }
 
             return inputFiles
+                .sortedBy { file -> file.name }
                 .filter { !IGNORED_TEST_CASES.contains(it.name) }
                 .map { it.relativeTo(testSuite) }
                 .map { arrayOf(it.path, outputsMap[it.name]?.path) }
