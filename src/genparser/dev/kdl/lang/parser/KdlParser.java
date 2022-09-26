@@ -366,7 +366,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // linespace* (node-block node-terminator linespace*)*
+  // linespace* (node-block node-terminator? linespace*)*
   static boolean node_list(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "node_list")) return false;
     boolean result_;
@@ -388,7 +388,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (node-block node-terminator linespace*)*
+  // (node-block node-terminator? linespace*)*
   private static boolean node_list_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "node_list_1")) return false;
     while (true) {
@@ -399,16 +399,23 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // node-block node-terminator linespace*
+  // node-block node-terminator? linespace*
   private static boolean node_list_1_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "node_list_1_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = node_block(builder_, level_ + 1);
-    result_ = result_ && node_terminator(builder_, level_ + 1);
+    result_ = result_ && node_list_1_0_1(builder_, level_ + 1);
     result_ = result_ && node_list_1_0_2(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
+  }
+
+  // node-terminator?
+  private static boolean node_list_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "node_list_1_0_1")) return false;
+    node_terminator(builder_, level_ + 1);
+    return true;
   }
 
   // linespace*
@@ -600,7 +607,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // linespace* (node-block node-terminator linespace*)*
+  // linespace* (node-block node-terminator? linespace*)*
   public static boolean top_level_node_list(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "top_level_node_list")) return false;
     boolean result_;
@@ -622,7 +629,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (node-block node-terminator linespace*)*
+  // (node-block node-terminator? linespace*)*
   private static boolean top_level_node_list_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "top_level_node_list_1")) return false;
     while (true) {
@@ -633,16 +640,23 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // node-block node-terminator linespace*
+  // node-block node-terminator? linespace*
   private static boolean top_level_node_list_1_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "top_level_node_list_1_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = node_block(builder_, level_ + 1);
-    result_ = result_ && node_terminator(builder_, level_ + 1);
+    result_ = result_ && top_level_node_list_1_0_1(builder_, level_ + 1);
     result_ = result_ && top_level_node_list_1_0_2(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
+  }
+
+  // node-terminator?
+  private static boolean top_level_node_list_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "top_level_node_list_1_0_1")) return false;
+    node_terminator(builder_, level_ + 1);
+    return true;
   }
 
   // linespace*

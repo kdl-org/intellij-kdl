@@ -53,14 +53,14 @@
 
 File ::= top-level-node-list
 
-top-level-node-list ::= linespace* (node-block node-terminator linespace*)*
+top-level-node-list ::= node-list
 
 node-block ::= ('/-' node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space*
 node-prop-or-arg ::= ('/-' node-space*)? (prop | arg)
 node-children ::= ('/-' node-space*)? '{' node-children-inner? '}' { pin=2 }
 
-private node-children-inner ::= !'}' node-list &'}' {pin=1 recoverWhile=node-children-recover}
-private node-list ::= linespace* (node-block node-terminator linespace*)*
+private node-children-inner ::= !'}' node-list &'}' { pin=1 recoverWhile=node-children-recover }
+private node-list ::= linespace* (node-block node-terminator? linespace*)*
 private node-children-recover ::= !'}'
 
 private node-space ::= ws* escline ws* | ws+
