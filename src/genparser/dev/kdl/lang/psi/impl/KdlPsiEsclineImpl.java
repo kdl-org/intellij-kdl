@@ -11,14 +11,14 @@ import static dev.kdl.lang.psi.ext.KdlElementTypes.*;
 import dev.kdl.lang.psi.ext.KdlElementImpl;
 import dev.kdl.lang.psi.*;
 
-public class KdlPsiNodesImpl extends KdlElementImpl implements KdlPsiNodes {
+public class KdlPsiEsclineImpl extends KdlElementImpl implements KdlPsiEscline {
 
-  public KdlPsiNodesImpl(ASTNode node) {
+  public KdlPsiEsclineImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull KdlPsiVisitor visitor) {
-    visitor.visitNodes(this);
+    visitor.visitEscline(this);
   }
 
   @Override
@@ -29,8 +29,8 @@ public class KdlPsiNodesImpl extends KdlElementImpl implements KdlPsiNodes {
 
   @Override
   @NotNull
-  public List<KdlPsiNodeBlock> getNodeBlockList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, KdlPsiNodeBlock.class);
+  public PsiElement getNewline() {
+    return findNotNullChildByType(NEWLINE);
   }
 
 }

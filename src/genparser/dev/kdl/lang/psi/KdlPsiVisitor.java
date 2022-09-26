@@ -15,6 +15,10 @@ public class KdlPsiVisitor extends PsiElementVisitor {
     visitKdlElement(o);
   }
 
+  public void visitEscline(@NotNull KdlPsiEscline o) {
+    visitKdlElement(o);
+  }
+
   public void visitIdentifier(@NotNull KdlPsiIdentifier o) {
     visitKdlElement(o);
   }
@@ -35,10 +39,6 @@ public class KdlPsiVisitor extends PsiElementVisitor {
     visitKdlElement(o);
   }
 
-  public void visitNodes(@NotNull KdlPsiNodes o) {
-    visitKdlElement(o);
-  }
-
   public void visitNull(@NotNull KdlPsiNull o) {
     visitKdlElement(o);
   }
@@ -52,6 +52,10 @@ public class KdlPsiVisitor extends PsiElementVisitor {
   }
 
   public void visitString(@NotNull KdlPsiString o) {
+    visitKdlElement(o);
+  }
+
+  public void visitTopLevelNodeList(@NotNull KdlPsiTopLevelNodeList o) {
     visitKdlElement(o);
   }
 

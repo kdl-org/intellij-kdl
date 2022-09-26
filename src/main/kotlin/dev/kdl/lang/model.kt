@@ -29,7 +29,7 @@ object KdlNullValue : KdlValue
 
 
 fun fromPsi(file: KdlPsiFile): KdlDocument? {
-    val psiNodes = file.findChildByClass(KdlPsiNodes::class.java) ?: return null
+    val psiNodes = file.findChildByClass(KdlPsiTopLevelNodeList::class.java) ?: return null
 
     val nodes: List<KdlNode> = psiNodes.nodeBlockList
         .map { nodeFromPsiNodeBlock(it) ?: return null }
@@ -46,7 +46,6 @@ private fun nodeFromPsiNodeBlock(nodeBlock: KdlPsiNodeBlock): KdlNode? {
         ?.let { nodeTypeFromPsi(it) }
 
     val children: List<KdlNode> = nodeBlock.nodeChildren
-        ?.nodes
         ?.nodeBlockList
         ?.map { nodeFromPsiNodeBlock(it) ?: return null }
         ?: return null

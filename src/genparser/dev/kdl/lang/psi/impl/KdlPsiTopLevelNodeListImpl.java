@@ -11,14 +11,14 @@ import static dev.kdl.lang.psi.ext.KdlElementTypes.*;
 import dev.kdl.lang.psi.ext.KdlElementImpl;
 import dev.kdl.lang.psi.*;
 
-public class KdlPsiNodePropOrArgImpl extends KdlElementImpl implements KdlPsiNodePropOrArg {
+public class KdlPsiTopLevelNodeListImpl extends KdlElementImpl implements KdlPsiTopLevelNodeList {
 
-  public KdlPsiNodePropOrArgImpl(ASTNode node) {
+  public KdlPsiTopLevelNodeListImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull KdlPsiVisitor visitor) {
-    visitor.visitNodePropOrArg(this);
+    visitor.visitTopLevelNodeList(this);
   }
 
   @Override
@@ -28,21 +28,9 @@ public class KdlPsiNodePropOrArgImpl extends KdlElementImpl implements KdlPsiNod
   }
 
   @Override
-  @Nullable
-  public KdlPsiArg getArg() {
-    return findChildByClass(KdlPsiArg.class);
-  }
-
-  @Override
   @NotNull
-  public List<KdlPsiEscline> getEsclineList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, KdlPsiEscline.class);
-  }
-
-  @Override
-  @Nullable
-  public KdlPsiProp getProp() {
-    return findChildByClass(KdlPsiProp.class);
+  public List<KdlPsiNodeBlock> getNodeBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, KdlPsiNodeBlock.class);
   }
 
 }

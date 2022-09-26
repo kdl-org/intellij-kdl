@@ -9,6 +9,9 @@ import dev.kdl.lang.psi.ext.KdlElement;
 public interface KdlPsiNodeBlock extends KdlElement {
 
   @NotNull
+  List<KdlPsiEscline> getEsclineList();
+
+  @NotNull
   KdlPsiIdentifier getIdentifier();
 
   @Nullable

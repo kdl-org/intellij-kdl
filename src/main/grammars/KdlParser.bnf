@@ -51,15 +51,16 @@
     ]
 }
 
-File ::= nodes
+File ::= top-level-node-list
 
-nodes ::= linespace* (node-block linespace*)*
+top-level-node-list ::= linespace* (node-block node-terminator linespace*)*
 
-node-block ::= ('/-' node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator
+node-block ::= ('/-' node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space*
 node-prop-or-arg ::= ('/-' node-space*)? (prop | arg)
 node-children ::= ('/-' node-space*)? '{' node-children-inner? '}' { pin=2 }
 
-private node-children-inner ::= !'}' nodes &'}' {pin=1 recoverWhile=node-children-recover}
+private node-children-inner ::= !'}' node-list &'}' {pin=1 recoverWhile=node-children-recover}
+private node-list ::= linespace* (node-block node-terminator linespace*)*
 private node-children-recover ::= !'}'
 
 private node-space ::= ws* escline ws* | ws+
@@ -77,7 +78,7 @@ number ::= DECIMAL_LITERAL | HEX_LITERAL | OCTAL_LITERAL | BINARY_LITERAL
 boolean ::= 'true' | 'false'
 null ::= 'null'
 
-private escline ::= '\' ws* NEWLINE
+escline ::= '\' ws* NEWLINE
 
 private linespace ::= NEWLINE | ws
 

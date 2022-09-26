@@ -12,9 +12,9 @@ public interface KdlElementTypes {
 
   IElementType ARG = new KdlElementType("ARG");
   IElementType BOOLEAN = new KdlElementType("BOOLEAN");
+  IElementType ESCLINE = new KdlElementType("ESCLINE");
   IElementType IDENTIFIER = new KdlElementType("IDENTIFIER");
   IElementType LITERAL = new KdlElementType("LITERAL");
-  IElementType NODES = new KdlElementType("NODES");
   IElementType NODE_BLOCK = new KdlElementType("NODE_BLOCK");
   IElementType NODE_CHILDREN = new KdlElementType("NODE_CHILDREN");
   IElementType NODE_PROP_OR_ARG = new KdlElementType("NODE_PROP_OR_ARG");
@@ -22,6 +22,7 @@ public interface KdlElementTypes {
   IElementType NUMBER = new KdlElementType("NUMBER");
   IElementType PROP = new KdlElementType("PROP");
   IElementType STRING = new KdlElementType("STRING");
+  IElementType TOP_LEVEL_NODE_LIST = new KdlElementType("TOP_LEVEL_NODE_LIST");
   IElementType TYPE = new KdlElementType("TYPE");
   IElementType VALUE = new KdlElementType("VALUE");
 
@@ -64,14 +65,14 @@ public interface KdlElementTypes {
       else if (type == BOOLEAN) {
         return new KdlPsiBooleanImpl(node);
       }
+      else if (type == ESCLINE) {
+        return new KdlPsiEsclineImpl(node);
+      }
       else if (type == IDENTIFIER) {
         return new KdlPsiIdentifierImpl(node);
       }
       else if (type == LITERAL) {
         return new KdlPsiLiteralImpl(node);
-      }
-      else if (type == NODES) {
-        return new KdlPsiNodesImpl(node);
       }
       else if (type == NODE_BLOCK) {
         return new KdlPsiNodeBlockImpl(node);
@@ -93,6 +94,9 @@ public interface KdlElementTypes {
       }
       else if (type == STRING) {
         return new KdlPsiStringImpl(node);
+      }
+      else if (type == TOP_LEVEL_NODE_LIST) {
+        return new KdlPsiTopLevelNodeListImpl(node);
       }
       else if (type == TYPE) {
         return new KdlPsiTypeImpl(node);

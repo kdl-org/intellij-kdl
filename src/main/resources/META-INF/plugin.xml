@@ -18,5 +18,7 @@
                              implementationClass="dev.kdl.lang.folding.KdlFoldingBuilder"/>
         <lang.braceMatcher language="KDL"
                            implementationClass="dev.kdl.lang.braceMatcher.KdlBraceMatcher"/>
+        <lang.formatter language="KDL"
+                        implementationClass="dev.kdl.lang.formatter.KdlFormattingModelBuilder"/>
     </extensions>
 </idea-plugin>

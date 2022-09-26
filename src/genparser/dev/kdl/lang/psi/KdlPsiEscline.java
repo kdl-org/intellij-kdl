@@ -6,9 +6,9 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import dev.kdl.lang.psi.ext.KdlElement;
 
-public interface KdlPsiNodes extends KdlElement {
+public interface KdlPsiEscline extends KdlElement {
 
   @NotNull
-  List<KdlPsiNodeBlock> getNodeBlockList();
+  PsiElement getNewline();
 
 }

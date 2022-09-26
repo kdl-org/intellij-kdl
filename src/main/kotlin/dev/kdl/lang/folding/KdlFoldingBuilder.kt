@@ -9,13 +9,13 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
-import dev.kdl.lang.psi.KdlPsiNodes
+import dev.kdl.lang.psi.KdlPsiNodeChildren
 
 class KdlFoldingBuilder: FoldingBuilderEx() {
 
     override fun buildFoldRegions(root: PsiElement, document: Document, quick: Boolean): Array<FoldingDescriptor> {
 
-        val descriptors = PsiTreeUtil.findChildrenOfType(root, KdlPsiNodes::class.java)
+        val descriptors = PsiTreeUtil.findChildrenOfType(root, KdlPsiNodeChildren::class.java)
             .mapNotNull { node ->
                 val range = TextRange.create(node.startOffset, node.endOffset)
                 if (range.length == 0) {

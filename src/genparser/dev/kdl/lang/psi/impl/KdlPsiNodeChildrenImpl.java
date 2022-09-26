@@ -28,9 +28,15 @@ public class KdlPsiNodeChildrenImpl extends KdlElementImpl implements KdlPsiNode
   }
 
   @Override
-  @Nullable
-  public KdlPsiNodes getNodes() {
-    return findChildByClass(KdlPsiNodes.class);
+  @NotNull
+  public List<KdlPsiEscline> getEsclineList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, KdlPsiEscline.class);
+  }
+
+  @Override
+  @NotNull
+  public List<KdlPsiNodeBlock> getNodeBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, KdlPsiNodeBlock.class);
   }
 
 }

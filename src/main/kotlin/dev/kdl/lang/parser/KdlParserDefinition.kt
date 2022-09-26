@@ -29,5 +29,6 @@ class KdlParserDefinition : ParserDefinition {
 
     companion object {
         val FILE = IFileElementType(KdlLanguage)
+        val WHITESPACES = TokenSet.create(UNICODE_SPACE, NEWLINE)
     }
 }
