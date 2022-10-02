@@ -38,6 +38,10 @@ class KdlBlock constructor(
             .toList()
     }
 
+    override fun getChildIndent(): Indent {
+        return Indent.getNormalIndent()
+    }
+
     override fun getIndent(): Indent {
         return indent
     }

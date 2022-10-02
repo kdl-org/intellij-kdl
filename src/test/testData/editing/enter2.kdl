@@ -1,0 +1,4 @@
+// this is broken
+node {
+    node {<caret>
+}
