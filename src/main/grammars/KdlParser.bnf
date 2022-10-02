@@ -64,7 +64,7 @@ private node-list ::= linespace* (node-block node-terminator linespace*)*
 private node-children-recover ::= !'}'
 
 private node-space ::= ws* escline ws* | ws+
-private node-terminator ::= NEWLINE | ';' | ws+ | <<eof>> // TODO whitespace terminator not allowed
+private node-terminator ::= NEWLINE | ';' | <<eof>> | ws* // TODO whitespace or empty terminator not allowed
 
 identifier ::= string | BARE_IDENTIFIER
 arg ::= value

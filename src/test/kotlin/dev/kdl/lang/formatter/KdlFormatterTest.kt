@@ -13,4 +13,5 @@ class KdlFormatterTest : FormatterTestCase() {
     override fun getFileExtension(): String = "kdl"
 
     fun test1() = doTest()
+    fun test2() = doTest()
 }
