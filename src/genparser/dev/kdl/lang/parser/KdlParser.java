@@ -366,7 +366,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // linespace* (node-block node-terminator? linespace*)*
+  // linespace* (node-block node-terminator linespace*)*
   static boolean node_list(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "node_list")) return false;
     boolean result_;
@@ -388,7 +388,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (node-block node-terminator? linespace*)*
+  // (node-block node-terminator linespace*)*
   private static boolean node_list_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "node_list_1")) return false;
     while (true) {
@@ -399,23 +399,16 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // node-block node-terminator? linespace*
+  // node-block node-terminator linespace*
   private static boolean node_list_1_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "node_list_1_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = node_block(builder_, level_ + 1);
-    result_ = result_ && node_list_1_0_1(builder_, level_ + 1);
+    result_ = result_ && node_terminator(builder_, level_ + 1);
     result_ = result_ && node_list_1_0_2(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
-  }
-
-  // node-terminator?
-  private static boolean node_list_1_0_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "node_list_1_0_1")) return false;
-    node_terminator(builder_, level_ + 1);
-    return true;
   }
 
   // linespace*
@@ -542,14 +535,30 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // NEWLINE | ';' | <<eof>>
+  // NEWLINE | ';' | ws+ | <<eof>>
   static boolean node_terminator(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "node_terminator")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, NEWLINE);
     if (!result_) result_ = consumeToken(builder_, SEMI);
+    if (!result_) result_ = node_terminator_2(builder_, level_ + 1);
     if (!result_) result_ = eof(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // ws+
+  private static boolean node_terminator_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "node_terminator_2")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = ws(builder_, level_ + 1);
+    while (result_) {
+      int pos_ = current_position_(builder_);
+      if (!ws(builder_, level_ + 1)) break;
+      if (!empty_element_parsed_guard_(builder_, "node_terminator_2", pos_)) break;
+    }
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
@@ -581,16 +590,41 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identifier '=' value
+  // identifier ws* '=' ws* value
   public static boolean prop(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "prop")) return false;
-    boolean result_;
+    boolean result_, pinned_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, PROP, "<prop>");
     result_ = identifier(builder_, level_ + 1);
+    result_ = result_ && prop_1(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, EQ);
-    result_ = result_ && value(builder_, level_ + 1);
-    exit_section_(builder_, level_, marker_, result_, false, null);
-    return result_;
+    pinned_ = result_; // pin = 3
+    result_ = result_ && report_error_(builder_, prop_3(builder_, level_ + 1));
+    result_ = pinned_ && value(builder_, level_ + 1) && result_;
+    exit_section_(builder_, level_, marker_, result_, pinned_, null);
+    return result_ || pinned_;
+  }
+
+  // ws*
+  private static boolean prop_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "prop_1")) return false;
+    while (true) {
+      int pos_ = current_position_(builder_);
+      if (!ws(builder_, level_ + 1)) break;
+      if (!empty_element_parsed_guard_(builder_, "prop_1", pos_)) break;
+    }
+    return true;
+  }
+
+  // ws*
+  private static boolean prop_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "prop_3")) return false;
+    while (true) {
+      int pos_ = current_position_(builder_);
+      if (!ws(builder_, level_ + 1)) break;
+      if (!empty_element_parsed_guard_(builder_, "prop_3", pos_)) break;
+    }
+    return true;
   }
 
   /* ********************************************************** */
@@ -618,26 +652,51 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '(' identifier ')'
+  // '(' ws* identifier ws* ')'
   public static boolean type(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "type")) return false;
     if (!nextTokenIs(builder_, L_PAREN)) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, L_PAREN);
+    result_ = result_ && type_1(builder_, level_ + 1);
     result_ = result_ && identifier(builder_, level_ + 1);
+    result_ = result_ && type_3(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, R_PAREN);
     exit_section_(builder_, marker_, TYPE, result_);
     return result_;
   }
 
+  // ws*
+  private static boolean type_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "type_1")) return false;
+    while (true) {
+      int pos_ = current_position_(builder_);
+      if (!ws(builder_, level_ + 1)) break;
+      if (!empty_element_parsed_guard_(builder_, "type_1", pos_)) break;
+    }
+    return true;
+  }
+
+  // ws*
+  private static boolean type_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "type_3")) return false;
+    while (true) {
+      int pos_ = current_position_(builder_);
+      if (!ws(builder_, level_ + 1)) break;
+      if (!empty_element_parsed_guard_(builder_, "type_3", pos_)) break;
+    }
+    return true;
+  }
+
   /* ********************************************************** */
-  // type? literal
+  // type? ws* literal
   public static boolean value(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "value")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, VALUE, "<value>");
     result_ = value_0(builder_, level_ + 1);
+    result_ = result_ && value_1(builder_, level_ + 1);
     result_ = result_ && literal(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
@@ -647,6 +706,17 @@ public class KdlParser implements PsiParser, LightPsiParser {
   private static boolean value_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "value_0")) return false;
     type(builder_, level_ + 1);
+    return true;
+  }
+
+  // ws*
+  private static boolean value_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "value_1")) return false;
+    while (true) {
+      int pos_ = current_position_(builder_);
+      if (!ws(builder_, level_ + 1)) break;
+      if (!empty_element_parsed_guard_(builder_, "value_1", pos_)) break;
+    }
     return true;
   }
 

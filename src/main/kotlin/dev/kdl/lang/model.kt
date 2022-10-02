@@ -68,7 +68,9 @@ private fun nodeArgFromPsi(nodeArg: KdlPsiArg): KdlArgument? {
 }
 
 private fun nodePropFromPsi(nodeProp: KdlPsiProp): Pair<String, KdlTypedValue>? {
-    val kdlTypedValue = nodeValueFromPsi(nodeProp.value) ?: return null
+    val kdlTypedValue = nodeProp.value
+        ?.let { nodeValueFromPsi(it) }
+        ?: return null
     val identifier = stringFromPsiIdentifier(nodeProp.identifier) ?: return null
     return identifier to kdlTypedValue
 }

@@ -60,18 +60,18 @@ node-prop-or-arg ::= ('/-' node-space*)? (prop | arg)
 node-children ::= ('/-' node-space*)? '{' node-children-inner? '}' { pin=2 }
 
 private node-children-inner ::= !'}' node-list &'}' { pin=1 recoverWhile=node-children-recover }
-private node-list ::= linespace* (node-block node-terminator? linespace*)*
+private node-list ::= linespace* (node-block node-terminator linespace*)*
 private node-children-recover ::= !'}'
 
 private node-space ::= ws* escline ws* | ws+
-private node-terminator ::= NEWLINE | ';' | <<eof>>
+private node-terminator ::= NEWLINE | ';' | ws+ | <<eof>> // TODO whitespace terminator not allowed
 
 identifier ::= string | BARE_IDENTIFIER
 arg ::= value
-prop ::= identifier '=' value
-value ::= type? literal
+prop ::= identifier ws* '=' ws* value { pin=3 } // TODO whitespaces not allowed
+value ::= type? ws* literal // TODO whitespaces not allowed
 literal ::= (string | number | boolean | null)
-type ::= '(' identifier ')'
+type ::= '(' ws* identifier ws* ')' // TODO whitespaces not allowed
 
 string ::= RAW_STRING_LITERAL | STRING_LITERAL
 number ::= DECIMAL_LITERAL | HEX_LITERAL | OCTAL_LITERAL | BINARY_LITERAL

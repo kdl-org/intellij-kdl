@@ -34,9 +34,9 @@ public class KdlPsiPropImpl extends KdlElementImpl implements KdlPsiProp {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public KdlPsiValue getValue() {
-    return findNotNullChildByClass(KdlPsiValue.class);
+    return findChildByClass(KdlPsiValue.class);
   }
 
 }

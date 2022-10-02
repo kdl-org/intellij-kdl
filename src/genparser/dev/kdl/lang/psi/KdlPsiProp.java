@@ -11,7 +11,7 @@ public interface KdlPsiProp extends KdlElement {
   @NotNull
   KdlPsiIdentifier getIdentifier();
 
-  @NotNull
+  @Nullable
   KdlPsiValue getValue();
 
 }
