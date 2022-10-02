@@ -12,6 +12,7 @@ class KdlFormattingModelBuilder : FormattingModelBuilder {
             formattingContext.containingFile,
             KdlBlock(
                 formattingContext.node,
+                null,
                 Indent.getNoneIndent(),
                 createSpaceBuilder(codeStyleSettings)
             ),

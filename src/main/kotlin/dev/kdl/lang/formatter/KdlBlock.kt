@@ -4,27 +4,34 @@ import com.intellij.formatting.*
 import com.intellij.lang.ASTNode
 import com.intellij.psi.formatter.common.AbstractBlock
 import dev.kdl.lang.parser.KdlParserDefinition.Companion.WHITESPACES
-import dev.kdl.lang.psi.ext.KdlElementTypes.*
+import dev.kdl.lang.psi.ext.KdlElementTypes.NODE_BLOCK
+import dev.kdl.lang.psi.ext.KdlElementTypes.NODE_CHILDREN
 
 class KdlBlock constructor(
     node: ASTNode,
+    wrap: Wrap?,
     private val indent: Indent,
     private val spacingBuilder: SpacingBuilder
-) : AbstractBlock(node, null, null) {
+) : AbstractBlock(node, wrap, null) {
 
     override fun buildChildren(): List<Block> {
         return generateSequence({ myNode.firstChildNode }, { it.treeNext })
-            .filter { astNode -> !WHITESPACES.contains(astNode.elementType) }
-            .map { astNode ->
-                val currentIndent = if (astNode.elementType === NODE_BLOCK && astNode.treeParent?.elementType != TOP_LEVEL_NODE_LIST) {
-                    Indent.getNormalIndent()
+            .filter { childNode -> !WHITESPACES.contains(childNode.elementType) }
+            .map { childNode ->
+                val (childIndent, currentWrap) = if (myNode.elementType === NODE_CHILDREN) {
+                    if (childNode.elementType == NODE_BLOCK) {
+                        Indent.getNormalIndent() to Wrap.createWrap(WrapType.ALWAYS, true)
+                    } else {
+                        Indent.getNoneIndent() to null
+                    }
                 } else {
-                    Indent.getNoneIndent()
+                    Indent.getNoneIndent() to null
                 }
 
                 KdlBlock(
-                    astNode,
-                    currentIndent,
+                    childNode,
+                    currentWrap,
+                    childIndent,
                     spacingBuilder
                 )
             }

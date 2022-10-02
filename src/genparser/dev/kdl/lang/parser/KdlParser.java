@@ -607,67 +607,14 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // linespace* (node-block node-terminator? linespace*)*
+  // node-list
   public static boolean top_level_node_list(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "top_level_node_list")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, TOP_LEVEL_NODE_LIST, "<top level node list>");
-    result_ = top_level_node_list_0(builder_, level_ + 1);
-    result_ = result_ && top_level_node_list_1(builder_, level_ + 1);
+    result_ = node_list(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
-  }
-
-  // linespace*
-  private static boolean top_level_node_list_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "top_level_node_list_0")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!linespace(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "top_level_node_list_0", pos_)) break;
-    }
-    return true;
-  }
-
-  // (node-block node-terminator? linespace*)*
-  private static boolean top_level_node_list_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "top_level_node_list_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!top_level_node_list_1_0(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "top_level_node_list_1", pos_)) break;
-    }
-    return true;
-  }
-
-  // node-block node-terminator? linespace*
-  private static boolean top_level_node_list_1_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "top_level_node_list_1_0")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = node_block(builder_, level_ + 1);
-    result_ = result_ && top_level_node_list_1_0_1(builder_, level_ + 1);
-    result_ = result_ && top_level_node_list_1_0_2(builder_, level_ + 1);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  // node-terminator?
-  private static boolean top_level_node_list_1_0_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "top_level_node_list_1_0_1")) return false;
-    node_terminator(builder_, level_ + 1);
-    return true;
-  }
-
-  // linespace*
-  private static boolean top_level_node_list_1_0_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "top_level_node_list_1_0_2")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!linespace(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "top_level_node_list_1_0_2", pos_)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */
