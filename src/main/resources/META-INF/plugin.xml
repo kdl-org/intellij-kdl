@@ -20,5 +20,7 @@
                            implementationClass="dev.kdl.lang.braceMatcher.KdlBraceMatcher"/>
         <lang.formatter language="KDL"
                         implementationClass="dev.kdl.lang.formatter.KdlFormattingModelBuilder"/>
+        <lang.commenter language="KDL"
+                        implementationClass="dev.kdl.lang.commenter.KdlCommenter"/>
     </extensions>
 </idea-plugin>

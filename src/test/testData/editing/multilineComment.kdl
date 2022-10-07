@@ -1,0 +1,9 @@
+node {
+    node {<selection>
+    }
+    node {
+    }
+    node "test"
+    node {</selection>
+    }
+}

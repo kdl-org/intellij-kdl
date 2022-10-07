@@ -1,0 +1,9 @@
+node {
+    node {/*
+    }
+    node {
+    }
+    node "test"
+    node {*/
+    }
+}

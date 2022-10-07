@@ -1,7 +1,11 @@
 package dev.kdl.lang.editing
 
+import com.intellij.codeInsight.actions.MultiCaretCodeInsightAction
+import com.intellij.codeInsight.generation.actions.CommentByBlockCommentAction
+import com.intellij.codeInsight.generation.actions.CommentByLineCommentAction
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
+
 
 @TestDataPath("\$CONTENT_ROOT/testData/editing")
 class KdlEditingTest : BasePlatformTestCase() {
@@ -10,10 +14,26 @@ class KdlEditingTest : BasePlatformTestCase() {
     fun testEnter1() = doEditingTest("\n")
     fun testEnter2() = doEditingTest("\n")
 
+    fun testLineComment() = doCommenterTest(CommentByLineCommentAction())
+    fun testMultilineComment() = doCommenterTest(CommentByBlockCommentAction())
+
     private fun doEditingTest(characters: String) {
-        val testName = getTestName(true)
-        myFixture.configureByFile("$testName.kdl")
+        myFixture.configureByFile(getBeforeFile())
         myFixture.type(characters)
-        myFixture.checkResultByFile("${testName}_after.kdl")
+        myFixture.checkResultByFile(getAfterFile())
+    }
+
+    private fun doCommenterTest(action: MultiCaretCodeInsightAction) {
+        myFixture.configureByFile(getBeforeFile())
+        action.actionPerformedImpl(project, myFixture.editor)
+        myFixture.checkResultByFile(getAfterFile())
+    }
+
+    private fun getBeforeFile(): String {
+        return "${getTestName(true)}.kdl"
+    }
+
+    private fun getAfterFile(): String {
+        return "${getTestName(true)}_after.kdl"
     }
 }
