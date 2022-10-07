@@ -33,17 +33,17 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
     }
 
     companion object {
-        private val KEYWORD = createTextAttributesKey("KDL_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
-        private val BARE_IDENTIFIER = createTextAttributesKey("KDL_IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER)
-        private val COMMA = createTextAttributesKey("KDL_COMMA", DefaultLanguageHighlighterColors.COMMA)
-        private val SEMICOLON = createTextAttributesKey("KDL_SEMICOLON", DefaultLanguageHighlighterColors.SEMICOLON)
-        private val PARENTHESES = createTextAttributesKey("KDL_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES)
-        private val BRACES = createTextAttributesKey("KDL_BRACES", DefaultLanguageHighlighterColors.BRACES)
-        private val BRACKETS = createTextAttributesKey("KDL_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS)
-        private val BLOCK_COMMENT = createTextAttributesKey("KDL_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT)
-        private val LINE_COMMENT = createTextAttributesKey("KDL_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
-        private val NUMBER = createTextAttributesKey("KDL_NUMBER", DefaultLanguageHighlighterColors.NUMBER)
-        private val STRING = createTextAttributesKey("KDL_STRING", DefaultLanguageHighlighterColors.STRING)
+        val KEYWORD = createTextAttributesKey("KDL_KEYWORD", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION)
+        val BARE_IDENTIFIER = createTextAttributesKey("KDL_IDENTIFIER", DefaultLanguageHighlighterColors.KEYWORD)
+        val COMMA = createTextAttributesKey("KDL_COMMA", DefaultLanguageHighlighterColors.COMMA)
+        val SEMICOLON = createTextAttributesKey("KDL_SEMICOLON", DefaultLanguageHighlighterColors.SEMICOLON)
+        val PARENTHESES = createTextAttributesKey("KDL_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES)
+        val BRACES = createTextAttributesKey("KDL_BRACES", DefaultLanguageHighlighterColors.BRACES)
+        val BRACKETS = createTextAttributesKey("KDL_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS)
+        val BLOCK_COMMENT = createTextAttributesKey("KDL_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT)
+        val LINE_COMMENT = createTextAttributesKey("KDL_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
+        val NUMBER = createTextAttributesKey("KDL_NUMBER", DefaultLanguageHighlighterColors.NUMBER)
+        val STRING = createTextAttributesKey("KDL_STRING", DefaultLanguageHighlighterColors.STRING)
         private val BAD_CHARACTER = createTextAttributesKey("KDL_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
 
         private val BAD_CHAR_KEYS = arrayOf(BAD_CHARACTER)

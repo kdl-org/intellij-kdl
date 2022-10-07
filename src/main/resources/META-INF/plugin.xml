@@ -22,5 +22,7 @@
                         implementationClass="dev.kdl.lang.formatter.KdlFormattingModelBuilder"/>
         <lang.commenter language="KDL"
                         implementationClass="dev.kdl.lang.commenter.KdlCommenter"/>
+        <colorSettingsPage
+            implementation="dev.kdl.lang.highlighter.KdlColorSettingsPage"/>
     </extensions>
 </idea-plugin>
