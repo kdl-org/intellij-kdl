@@ -1,5 +1,6 @@
 package dev.kdl
 
+import com.intellij.lang.annotation.HighlightSeverity.ERROR
 import com.intellij.testFramework.Parameterized
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
@@ -16,6 +17,8 @@ import java.io.File
 @RunWith(Parameterized::class)
 class KdlTestSuite : BasePlatformTestCase() {
 
+    override fun getTestDataPath() = "src/test/testData/testSuite"
+
     @Parameter
     @JvmField
     public var input: String? = null
@@ -24,24 +27,24 @@ class KdlTestSuite : BasePlatformTestCase() {
     @JvmField
     public var expectedKdl: String? = null
 
-    override fun getTestDataPath() = "src/test/testData/testSuite"
-
     @Test
     fun testCase() {
         val inputFile = myFixture.configureByFile(input!!)
-        val expectedFile = expectedKdl?.let { myFixture.configureByFile(it) }
-
         val kdlFile = assertInstanceOf(inputFile, KdlPsiFile::class.java)
         val hasErrors = PsiErrorElementUtil.hasErrors(project, kdlFile.virtualFile)
+        val hasHighlightErrors = myFixture.doHighlighting().any { it.severity == ERROR }
+
+        val expectedFile = expectedKdl?.let { myFixture.configureByFile(it) }
 
         if (expectedFile == null) {
-            assertTrue(hasErrors)
+            assertTrue(hasErrors || hasHighlightErrors)
         } else {
             assertFalse(hasErrors)
             val expectedKdlFile = assertInstanceOf(inputFile, KdlPsiFile::class.java)
             val expectedHasErrors = PsiErrorElementUtil.hasErrors(project, expectedKdlFile.virtualFile)
-            assertFalse(expectedHasErrors)
+            val expectedHasHighlightErrors = myFixture.doHighlighting().any { it.severity == ERROR }
 
+            assertFalse(expectedHasErrors && expectedHasHighlightErrors)
             assertEquals(fromPsi(kdlFile), fromPsi(expectedKdlFile))
         }
     }

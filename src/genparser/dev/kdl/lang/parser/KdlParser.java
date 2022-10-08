@@ -648,7 +648,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '(' ws* identifier ws* ')'
+  // '(' ws* identifier ws* ')' ws*
   public static boolean type(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "type")) return false;
     if (!nextTokenIs(builder_, L_PAREN)) return false;
@@ -659,6 +659,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
     result_ = result_ && identifier(builder_, level_ + 1);
     result_ = result_ && type_3(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, R_PAREN);
+    result_ = result_ && type_5(builder_, level_ + 1);
     exit_section_(builder_, marker_, TYPE, result_);
     return result_;
   }
@@ -685,14 +686,24 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
+  // ws*
+  private static boolean type_5(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "type_5")) return false;
+    while (true) {
+      int pos_ = current_position_(builder_);
+      if (!ws(builder_, level_ + 1)) break;
+      if (!empty_element_parsed_guard_(builder_, "type_5", pos_)) break;
+    }
+    return true;
+  }
+
   /* ********************************************************** */
-  // type? ws* literal
+  // type? literal
   public static boolean value(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "value")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, VALUE, "<value>");
     result_ = value_0(builder_, level_ + 1);
-    result_ = result_ && value_1(builder_, level_ + 1);
     result_ = result_ && literal(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
@@ -702,17 +713,6 @@ public class KdlParser implements PsiParser, LightPsiParser {
   private static boolean value_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "value_0")) return false;
     type(builder_, level_ + 1);
-    return true;
-  }
-
-  // ws*
-  private static boolean value_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "value_1")) return false;
-    while (true) {
-      int pos_ = current_position_(builder_);
-      if (!ws(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "value_1", pos_)) break;
-    }
     return true;
   }
 

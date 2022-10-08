@@ -74,10 +74,10 @@ private node-terminator ::= NEWLINE | ';' | <<eof>> | ws* // TODO whitespace or 
 
 identifier ::= string | BARE_IDENTIFIER
 arg ::= value
-prop ::= identifier ws* '=' ws* value { pin=3 } // TODO whitespaces not allowed
-value ::= type? ws* literal // TODO whitespaces not allowed
+prop ::= identifier ws* '=' ws* value { pin=3 } // whitespaces are illegal here
+value ::= type? literal
 literal ::= (string | number | boolean | null)
-type ::= '(' ws* identifier ws* ')' // TODO whitespaces not allowed
+type ::= '(' ws* identifier ws* ')' ws* // whitespaces are illegal here
 
 string ::= RAW_STRING_LITERAL | STRING_LITERAL
 number ::= DECIMAL_LITERAL | HEX_LITERAL | OCTAL_LITERAL | BINARY_LITERAL

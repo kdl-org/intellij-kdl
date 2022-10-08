@@ -19,7 +19,8 @@ class KdlItemCommentAnnotator : Annotator {
             holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                 .range(element)
                 .textAttributes(KdlSyntaxHighlighter.ITEM_COMMENT)
-                .withFix(UncommentIntention(element)).create()
+                .withFix(UncommentIntention(element))
+                .create()
         }
     }
 }

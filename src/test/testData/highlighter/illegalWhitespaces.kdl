@@ -1,0 +1,7 @@
+node prop<error tooltip="Whitespace is not allowed here"> </error>=<error tooltip="Whitespace is not allowed here"> </error>"val"
+
+node (type)<error tooltip="Whitespace is not allowed here"> </error>"val"
+
+node (type)<error tooltip="Whitespace is not allowed here"> </error>"val"
+
+(<error tooltip="Whitespace is not allowed here"> </error>type<error tooltip="Whitespace is not allowed here"> </error>)<error tooltip="Whitespace is not allowed here"> </error>node
