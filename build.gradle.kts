@@ -120,10 +120,10 @@ val generateKdlLexer = task<GenerateLexerTask>("generateKdlLexer") {
     purgeOldFiles.set(true)
 }
 
-val generateKdlEscapeLexer = task<GenerateLexerTask>("generateKdlEscapeLexer") {
-    source.set("src/main/grammars/KdlEscapeLexer.flex")
+val generateKdlStringLexer = task<GenerateLexerTask>("generateKdlStringLexer") {
+    source.set("src/main/grammars/KdlStringLexer.flex")
     targetDir.set("src/genparser/dev/kdl/lang/escape")
-    targetClass.set("KdlEscapeLexer")
+    targetClass.set("KdlStringLexer")
     purgeOldFiles.set(true)
 }
 
@@ -134,7 +134,7 @@ val generateKdlParser = task<GenerateParserTask>("generateKdlParser") {
     pathToPsiRoot.set("dev/kdl/lang/psi")
     purgeOldFiles.set(true)
 
-    dependsOn(generateKdlLexer, generateKdlEscapeLexer)
+    dependsOn(generateKdlLexer, generateKdlStringLexer)
 }
 
 

@@ -1,8 +1,5 @@
 package dev.kdl.lang.highlighter
 
-import dev.kdl.lang.lexer.KdlFlexAdapter
-import dev.kdl.lang.psi.ext.KdlElementTypes
-import dev.kdl.lang.psi.ext.KdlElementTypes.*
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
 import com.intellij.openapi.editor.HighlighterColors
@@ -11,10 +8,14 @@ import com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributes
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
+import dev.kdl.lang.escape.EscapeType.ESCAPE
+import dev.kdl.lang.escape.EscapeType.NOT_ESCAPE
+import dev.kdl.lang.psi.ext.KdlElementTypes
+import dev.kdl.lang.psi.ext.KdlElementTypes.*
 
 
 class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
-    override fun getHighlightingLexer(): Lexer = KdlFlexAdapter()
+    override fun getHighlightingLexer(): Lexer = KdlSyntaxHighlighterLexer()
 
     override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> = when (tokenType) {
         KdlElementTypes.BARE_IDENTIFIER -> BARE_IDENTIFIER_KEYS
@@ -27,7 +28,8 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
         MULTI_LINE_COMMENT -> BLOCK_COMMENT_KEYS
         SINGLE_LINE_COMMENT -> LINE_COMMENT_KEYS
         DECIMAL_LITERAL, HEX_LITERAL, OCTAL_LITERAL, BINARY_LITERAL -> NUMBER_KEYS
-        STRING_LITERAL, RAW_STRING_LITERAL -> STRING_KEYS
+        RAW_STRING_LITERAL, NOT_ESCAPE -> STRING_KEYS
+        ESCAPE -> STRING_ESCAPE_SEQUENCE_KEYS
         TokenType.BAD_CHARACTER -> BAD_CHAR_KEYS
         else -> EMPTY_KEYS
     }
@@ -44,6 +46,7 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
         val LINE_COMMENT = createTextAttributesKey("KDL_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
         val NUMBER = createTextAttributesKey("KDL_NUMBER", DefaultLanguageHighlighterColors.NUMBER)
         val STRING = createTextAttributesKey("KDL_STRING", DefaultLanguageHighlighterColors.STRING)
+        val STRING_ESCAPE_SEQUENCE = createTextAttributesKey("KDL_STRING_ESCAPE_SEQUENCE", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE)
         private val BAD_CHARACTER = createTextAttributesKey("KDL_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
 
         private val BAD_CHAR_KEYS = arrayOf(BAD_CHARACTER)
@@ -58,6 +61,7 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
         private val LINE_COMMENT_KEYS = arrayOf(LINE_COMMENT)
         private val NUMBER_KEYS = arrayOf(NUMBER)
         private val STRING_KEYS = arrayOf(STRING)
+        private val STRING_ESCAPE_SEQUENCE_KEYS = arrayOf(STRING_ESCAPE_SEQUENCE)
         private val EMPTY_KEYS = arrayOf<TextAttributesKey>()
     }
 }

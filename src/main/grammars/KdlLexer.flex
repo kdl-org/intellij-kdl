@@ -2,7 +2,7 @@ package dev.kdl.lang.lexer;
 
 
 import com.intellij.lexer.FlexLexer;
-import com.intellij.psi.tree.IElementType;import org.intellij.lang.regexp.RegExpTT;
+import com.intellij.psi.tree.IElementType;
 
 import static com.intellij.psi.TokenType.*;
 import static dev.kdl.lang.psi.ext.KdlElementTypes.*;

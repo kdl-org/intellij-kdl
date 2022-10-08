@@ -8,6 +8,6 @@ class KdlLexerTest: LexerTestBase() {
 
     override fun getDirPath(): String = "lexer"
 
-    fun testBareIdentifier() = doFileTest()
+    fun test1() = doFileTest()
 
 }

@@ -82,7 +82,8 @@ class KdlColorSettingsPage : ColorSettingsPage {
             AttributesDescriptor("Block comment", KdlSyntaxHighlighter.BLOCK_COMMENT),
             AttributesDescriptor("Line comment", KdlSyntaxHighlighter.LINE_COMMENT),
             AttributesDescriptor("Number", KdlSyntaxHighlighter.NUMBER),
-            AttributesDescriptor("String", KdlSyntaxHighlighter.STRING)
+            AttributesDescriptor("String", KdlSyntaxHighlighter.STRING),
+            AttributesDescriptor("String//Escape sequence", KdlSyntaxHighlighter.STRING_ESCAPE_SEQUENCE)
         )
     }
 }

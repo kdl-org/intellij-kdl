@@ -1,9 +1,10 @@
 package dev.kdl.lang.escape
 
+import com.intellij.psi.tree.IElementType
 import java.io.StringReader
 
 fun unescapeString(rawValue: String): String {
-    val lexer = KdlEscapeLexer(StringReader(rawValue))
+    val lexer = KdlStringLexer(StringReader(rawValue))
 
     return tokenize(lexer)
         .joinToString(separator = "") {
@@ -15,7 +16,7 @@ fun unescapeString(rawValue: String): String {
         }
 }
 
-private fun tokenize(lexer: KdlEscapeLexer): Sequence<Pair<EscapeType, CharSequence>> =
+private fun tokenize(lexer: KdlStringLexer): Sequence<Pair<IElementType, CharSequence>> =
     generateSequence {
         val escapeType = lexer.advance() ?: return@generateSequence null
         escapeType to lexer.yytext()
