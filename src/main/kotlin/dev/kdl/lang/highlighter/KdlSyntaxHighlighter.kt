@@ -44,6 +44,7 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
         val BRACKETS = createTextAttributesKey("KDL_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS)
         val BLOCK_COMMENT = createTextAttributesKey("KDL_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT)
         val LINE_COMMENT = createTextAttributesKey("KDL_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
+        val ITEM_COMMENT = createTextAttributesKey("KDL_ITEM_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
         val NUMBER = createTextAttributesKey("KDL_NUMBER", DefaultLanguageHighlighterColors.NUMBER)
         val STRING = createTextAttributesKey("KDL_STRING", DefaultLanguageHighlighterColors.STRING)
         val STRING_ESCAPE_SEQUENCE = createTextAttributesKey("KDL_STRING_ESCAPE_SEQUENCE", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE)

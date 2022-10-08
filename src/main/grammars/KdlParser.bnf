@@ -13,6 +13,12 @@
     elementTypeClass='dev.kdl.lang.lexer.KdlElementType'
     tokenTypeClass='dev.kdl.lang.lexer.KdlTokenType'
 
+    generateTokenAccessors=true
+
+    implements("node-block")="dev.kdl.lang.psi.ext.KdlCommentableItem"
+    implements("node-prop-or-arg")="dev.kdl.lang.psi.ext.KdlCommentableItem"
+    implements("node-children")="dev.kdl.lang.psi.ext.KdlCommentableItem"
+
     tokens = [
         SLASHDASH='/-'
         SLASH='/'

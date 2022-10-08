@@ -29,6 +29,12 @@ public class KdlPsiEsclineImpl extends KdlElementImpl implements KdlPsiEscline {
 
   @Override
   @NotNull
+  public PsiElement getBackslash() {
+    return findNotNullChildByType(BACKSLASH);
+  }
+
+  @Override
+  @NotNull
   public PsiElement getNewline() {
     return findNotNullChildByType(NEWLINE);
   }

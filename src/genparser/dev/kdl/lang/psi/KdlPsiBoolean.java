@@ -8,4 +8,10 @@ import dev.kdl.lang.psi.ext.KdlElement;
 
 public interface KdlPsiBoolean extends KdlElement {
 
+  @Nullable
+  PsiElement getFalseLiteral();
+
+  @Nullable
+  PsiElement getTrueLiteral();
+
 }

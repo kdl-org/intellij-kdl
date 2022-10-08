@@ -33,4 +33,16 @@ public class KdlPsiTypeImpl extends KdlElementImpl implements KdlPsiType {
     return findNotNullChildByClass(KdlPsiIdentifier.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getLParen() {
+    return findNotNullChildByType(L_PAREN);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getRParen() {
+    return findNotNullChildByType(R_PAREN);
+  }
+
 }

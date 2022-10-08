@@ -9,6 +9,9 @@ import dev.kdl.lang.psi.ext.KdlElement;
 public interface KdlPsiEscline extends KdlElement {
 
   @NotNull
+  PsiElement getBackslash();
+
+  @NotNull
   PsiElement getNewline();
 
 }

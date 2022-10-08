@@ -4,9 +4,9 @@ package dev.kdl.lang.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import dev.kdl.lang.psi.ext.KdlElement;
+import dev.kdl.lang.psi.ext.KdlCommentableItem;
 
-public interface KdlPsiNodeBlock extends KdlElement {
+public interface KdlPsiNodeBlock extends KdlCommentableItem {
 
   @NotNull
   List<KdlPsiEscline> getEsclineList();
@@ -22,5 +22,8 @@ public interface KdlPsiNodeBlock extends KdlElement {
 
   @Nullable
   KdlPsiType getType();
+
+  @Nullable
+  PsiElement getSlashdash();
 
 }

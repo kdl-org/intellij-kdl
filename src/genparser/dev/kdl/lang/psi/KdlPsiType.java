@@ -11,4 +11,10 @@ public interface KdlPsiType extends KdlElement {
   @NotNull
   KdlPsiIdentifier getIdentifier();
 
+  @NotNull
+  PsiElement getLParen();
+
+  @NotNull
+  PsiElement getRParen();
+
 }

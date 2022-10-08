@@ -10,19 +10,16 @@
                   extensions="kdl"
                   language="KDL"
                   implementationClass="dev.kdl.lang.KdlFileType" />
-        <lang.parserDefinition language="KDL"
-                               implementationClass="dev.kdl.lang.parser.KdlParserDefinition" />
+        <lang.parserDefinition language="KDL" implementationClass="dev.kdl.lang.parser.KdlParserDefinition" />
+
         <lang.syntaxHighlighterFactory language="KDL"
                                        implementationClass="dev.kdl.lang.highlighter.KdlSyntaxHighlighterFactory"/>
-        <lang.foldingBuilder language="KDL"
-                             implementationClass="dev.kdl.lang.folding.KdlFoldingBuilder"/>
-        <lang.braceMatcher language="KDL"
-                           implementationClass="dev.kdl.lang.braceMatcher.KdlBraceMatcher"/>
-        <lang.formatter language="KDL"
-                        implementationClass="dev.kdl.lang.formatter.KdlFormattingModelBuilder"/>
-        <lang.commenter language="KDL"
-                        implementationClass="dev.kdl.lang.commenter.KdlCommenter"/>
-        <colorSettingsPage
-            implementation="dev.kdl.lang.highlighter.KdlColorSettingsPage"/>
+        <colorSettingsPage implementation="dev.kdl.lang.highlighter.KdlColorSettingsPage"/>
+        <annotator language="KDL" implementationClass="dev.kdl.lang.annotators.KdlItemCommentAnnotator"/>
+
+        <lang.foldingBuilder language="KDL" implementationClass="dev.kdl.lang.folding.KdlFoldingBuilder"/>
+        <lang.braceMatcher language="KDL" implementationClass="dev.kdl.lang.braceMatcher.KdlBraceMatcher"/>
+        <lang.formatter language="KDL" implementationClass="dev.kdl.lang.formatter.KdlFormattingModelBuilder"/>
+        <lang.commenter language="KDL" implementationClass="dev.kdl.lang.commenter.KdlCommenter"/>
     </extensions>
 </idea-plugin>

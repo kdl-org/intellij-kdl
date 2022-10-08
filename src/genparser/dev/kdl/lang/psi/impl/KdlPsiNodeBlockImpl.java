@@ -57,4 +57,10 @@ public class KdlPsiNodeBlockImpl extends KdlElementImpl implements KdlPsiNodeBlo
     return findChildByClass(KdlPsiType.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getSlashdash() {
+    return findChildByType(SLASHDASH);
+  }
+
 }

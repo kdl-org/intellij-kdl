@@ -27,4 +27,16 @@ public class KdlPsiBooleanImpl extends KdlElementImpl implements KdlPsiBoolean {
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getFalseLiteral() {
+    return findChildByType(FALSE_LITERAL);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getTrueLiteral() {
+    return findChildByType(TRUE_LITERAL);
+  }
+
 }

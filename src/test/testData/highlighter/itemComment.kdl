@@ -1,0 +1,10 @@
+<info textAttributesKey="KDL_ITEM_COMMENT">/-mynode "foo" key=1 {
+  a
+  b
+  c
+}</info>
+
+mynode <info textAttributesKey="KDL_ITEM_COMMENT">/-"commented"</info> "not commented" <info textAttributesKey="KDL_ITEM_COMMENT">/-key="value"</info> <info textAttributesKey="KDL_ITEM_COMMENT">/-{
+  a
+  b
+}</info>

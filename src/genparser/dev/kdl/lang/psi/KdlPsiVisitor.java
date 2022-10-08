@@ -4,6 +4,7 @@ package dev.kdl.lang.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import dev.kdl.lang.psi.ext.KdlElement;
+import dev.kdl.lang.psi.ext.KdlCommentableItem;
 
 public class KdlPsiVisitor extends PsiElementVisitor {
 
@@ -28,15 +29,15 @@ public class KdlPsiVisitor extends PsiElementVisitor {
   }
 
   public void visitNodeBlock(@NotNull KdlPsiNodeBlock o) {
-    visitKdlElement(o);
+    visitKdlCommentableItem(o);
   }
 
   public void visitNodeChildren(@NotNull KdlPsiNodeChildren o) {
-    visitKdlElement(o);
+    visitKdlCommentableItem(o);
   }
 
   public void visitNodePropOrArg(@NotNull KdlPsiNodePropOrArg o) {
-    visitKdlElement(o);
+    visitKdlCommentableItem(o);
   }
 
   public void visitNull(@NotNull KdlPsiNull o) {
@@ -65,6 +66,10 @@ public class KdlPsiVisitor extends PsiElementVisitor {
 
   public void visitValue(@NotNull KdlPsiValue o) {
     visitKdlElement(o);
+  }
+
+  public void visitKdlCommentableItem(@NotNull KdlCommentableItem o) {
+    visitElement(o);
   }
 
   public void visitKdlElement(@NotNull KdlElement o) {

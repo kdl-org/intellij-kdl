@@ -16,7 +16,7 @@ class KdlColorSettingsPage : ColorSettingsPage {
 
     override fun getDisplayName(): String = "KDL"
 
-    override fun getIcon(): Icon = ColorIcon(10, Color(0xFFDA00))
+    override fun getIcon(): Icon? = null
 
     override fun getHighlighter(): SyntaxHighlighter = KdlSyntaxHighlighter()
 
@@ -37,14 +37,15 @@ class KdlColorSettingsPage : ColorSettingsPage {
         multiline
         value"
         other-raw r#"hello"world"#
+        node null
         num 1.234e-42
         my-hex 0xdeadbeef
         my-octal 0o755
         my-binary 0b10101101
         bignum 1_000_000
-        // C style
+        // C style comment
         /*
-        C style multiline
+        C style multiline comment
         */
         tag /*foo=true*/ bar=false
         /*/*
@@ -81,6 +82,7 @@ class KdlColorSettingsPage : ColorSettingsPage {
             AttributesDescriptor("Brackets", KdlSyntaxHighlighter.BRACKETS),
             AttributesDescriptor("Block comment", KdlSyntaxHighlighter.BLOCK_COMMENT),
             AttributesDescriptor("Line comment", KdlSyntaxHighlighter.LINE_COMMENT),
+            AttributesDescriptor("Item comment", KdlSyntaxHighlighter.ITEM_COMMENT),
             AttributesDescriptor("Number", KdlSyntaxHighlighter.NUMBER),
             AttributesDescriptor("String", KdlSyntaxHighlighter.STRING),
             AttributesDescriptor("String//Escape sequence", KdlSyntaxHighlighter.STRING_ESCAPE_SEQUENCE)

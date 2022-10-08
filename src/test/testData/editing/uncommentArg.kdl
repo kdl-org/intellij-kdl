@@ -1,0 +1,4 @@
+mynode /-"co<caret>mmented" "not commented" {
+  a
+  b
+}

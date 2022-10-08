@@ -45,4 +45,10 @@ public class KdlPsiNodePropOrArgImpl extends KdlElementImpl implements KdlPsiNod
     return findChildByClass(KdlPsiProp.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getSlashdash() {
+    return findChildByType(SLASHDASH);
+  }
+
 }

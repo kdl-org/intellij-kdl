@@ -8,4 +8,7 @@ import dev.kdl.lang.psi.ext.KdlElement;
 
 public interface KdlPsiNull extends KdlElement {
 
+  @NotNull
+  PsiElement getNullLiteral();
+
 }

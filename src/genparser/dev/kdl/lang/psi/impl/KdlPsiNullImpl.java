@@ -27,4 +27,10 @@ public class KdlPsiNullImpl extends KdlElementImpl implements KdlPsiNull {
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getNullLiteral() {
+    return findNotNullChildByType(NULL_LITERAL);
+  }
+
 }

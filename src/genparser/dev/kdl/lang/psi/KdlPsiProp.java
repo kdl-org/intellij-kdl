@@ -14,4 +14,7 @@ public interface KdlPsiProp extends KdlElement {
   @Nullable
   KdlPsiValue getValue();
 
+  @NotNull
+  PsiElement getEq();
+
 }

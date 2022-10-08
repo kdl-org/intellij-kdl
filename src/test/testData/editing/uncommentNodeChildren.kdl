@@ -1,0 +1,4 @@
+mynode "not commented" key="value" /-{
+  a
+  b<caret>
+}

@@ -1,13 +1,15 @@
 package dev.kdl.lang.highlighter
 
-import com.intellij.lexer.Lexer
-import dev.kdl.lang.lexer.LexerTestBase
+import com.intellij.testFramework.TestDataPath
+import com.intellij.testFramework.fixtures.BasePlatformTestCase
 
-class KdlHighlighterTest: LexerTestBase() {
+@TestDataPath("\$CONTENT_ROOT/testData/highlighter")
+class KdlHighlighterTest : BasePlatformTestCase() {
+    override fun getTestDataPath(): String = "src/test/testData/highlighter"
 
-    override fun createLexer(): Lexer = KdlSyntaxHighlighterLexer()
+    fun testItemComment() = doHighlightingTest(checkInfos = true)
 
-    override fun getDirPath(): String = "highlighter"
-
-    fun test1() = doFileTest()
+    private fun doHighlightingTest(checkWarnings: Boolean = true, checkInfos: Boolean = false, checkWeakWarnings: Boolean = true) {
+        myFixture.testHighlighting(checkWarnings, checkInfos, checkWeakWarnings, "${getTestName(true)}.kdl")
+    }
 }

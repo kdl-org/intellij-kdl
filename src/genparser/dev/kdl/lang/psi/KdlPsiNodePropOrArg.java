@@ -4,9 +4,9 @@ package dev.kdl.lang.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import dev.kdl.lang.psi.ext.KdlElement;
+import dev.kdl.lang.psi.ext.KdlCommentableItem;
 
-public interface KdlPsiNodePropOrArg extends KdlElement {
+public interface KdlPsiNodePropOrArg extends KdlCommentableItem {
 
   @Nullable
   KdlPsiArg getArg();
@@ -16,5 +16,8 @@ public interface KdlPsiNodePropOrArg extends KdlElement {
 
   @Nullable
   KdlPsiProp getProp();
+
+  @Nullable
+  PsiElement getSlashdash();
 
 }

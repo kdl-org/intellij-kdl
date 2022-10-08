@@ -6,7 +6,7 @@ class KdlLexerTest: LexerTestBase() {
 
     override fun createLexer(): Lexer = KdlFlexAdapter()
 
-    override fun getDirPath(): String = "lexer"
+    override fun getDirPath(): String = "lexer/base"
 
     fun test1() = doFileTest()
 
