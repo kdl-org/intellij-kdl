@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>dev.kdl</id>
-    <name>KDL Lang Support</name>
+    <name>KDL Document Language</name>
     <vendor url="https://kdl.dev/">KDL</vendor>
 
     <depends>com.intellij.modules.platform</depends>

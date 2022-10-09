@@ -1,8 +1,7 @@
 package dev.kdl.lang
 
 import com.intellij.openapi.fileTypes.LanguageFileType
-import com.intellij.util.ui.ColorIcon
-import java.awt.Color
+import dev.kdl.KdlIcons.FileType
 import javax.swing.Icon
 
 object KdlFileType: LanguageFileType(KdlLanguage) {
@@ -12,5 +11,5 @@ object KdlFileType: LanguageFileType(KdlLanguage) {
 
     override fun getDefaultExtension(): String = "kdl"
 
-    override fun getIcon(): Icon = ColorIcon(10, Color(0xFFDA00)) // TODO icon
+    override fun getIcon(): Icon = FileType
 }
