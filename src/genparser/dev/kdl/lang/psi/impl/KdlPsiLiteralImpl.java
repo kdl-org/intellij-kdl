@@ -51,4 +51,10 @@ public class KdlPsiLiteralImpl extends KdlElementImpl implements KdlPsiLiteral {
     return findChildByClass(KdlPsiString.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getBareIdentifier() {
+    return findChildByType(BARE_IDENTIFIER);
+  }
+
 }

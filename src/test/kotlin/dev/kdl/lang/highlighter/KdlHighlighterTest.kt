@@ -11,6 +11,7 @@ class KdlHighlighterTest : BasePlatformTestCase() {
 
     fun testIllegalWhitespaces() = doHighlightingTest()
     fun testIllegalComment() = doHighlightingTest()
+    fun testIllegalBareIdentifier() = doHighlightingTest()
 
     private fun doHighlightingTest(checkWarnings: Boolean = true, checkInfos: Boolean = false, checkWeakWarnings: Boolean = true) {
         myFixture.testHighlighting(checkWarnings, checkInfos, checkWeakWarnings, "${getTestName(true)}.kdl")

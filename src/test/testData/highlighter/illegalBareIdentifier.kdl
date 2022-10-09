@@ -1,0 +1,2 @@
+node prop=<error tooltip="String value have to be wrapped in quotes">val</error>
+

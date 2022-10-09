@@ -76,7 +76,7 @@ identifier ::= string | BARE_IDENTIFIER
 arg ::= value
 prop ::= identifier ws* '=' ws* value { pin=3 } // whitespaces are illegal here
 value ::= type? literal
-literal ::= (string | number | boolean | null)
+literal ::= (string | BARE_IDENTIFIER | number | boolean | null) // BARE_IDENTIFIER is illegal here
 type ::= '(' ws* identifier ws* ')' ws* // whitespaces are illegal here
 
 string ::= RAW_STRING_LITERAL | STRING_LITERAL

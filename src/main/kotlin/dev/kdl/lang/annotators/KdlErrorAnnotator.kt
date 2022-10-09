@@ -1,8 +1,12 @@
 package dev.kdl.lang.annotators
 
+import com.intellij.codeInspection.LocalQuickFixAndIntentionActionOnPsiElement
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity
+import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.project.Project
 import com.intellij.patterns.PatternCondition
 import com.intellij.patterns.PlatformPatterns.psiComment
 import com.intellij.patterns.PlatformPatterns.psiElement
@@ -10,13 +14,16 @@ import com.intellij.patterns.PsiElementPattern.Capture
 import com.intellij.patterns.StandardPatterns.or
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFile
 import com.intellij.util.ProcessingContext
 import dev.kdl.KdlBundle
+import dev.kdl.lang.psi.KdlElementFactory
+import dev.kdl.lang.psi.KdlPsiLiteral
 import dev.kdl.lang.psi.KdlPsiProp
 import dev.kdl.lang.psi.KdlPsiType
 import dev.kdl.lang.psi.ext.KdlElementTypes
+import dev.kdl.lang.psi.ext.KdlElementTypes.BARE_IDENTIFIER
 import dev.kdl.lang.psiElement
-import java.util.*
 
 class KdlErrorAnnotator : Annotator {
 
@@ -31,6 +38,13 @@ class KdlErrorAnnotator : Annotator {
             holder.newSilentAnnotation(HighlightSeverity.ERROR)
                 .range(element)
                 .tooltip(KdlBundle.message("annotator.illegalComments"))
+                .create()
+        }
+        if (illegalBareIdentifierPattern.accepts(element)) {
+            holder.newSilentAnnotation(HighlightSeverity.ERROR)
+                .range(element)
+                .tooltip(KdlBundle.message("annotator.bareIdentifierAsString"))
+                .withFix(WrapBareIdentifierIntention(element))
                 .create()
         }
     }
@@ -61,5 +75,31 @@ class KdlErrorAnnotator : Annotator {
                     )
                 ),
             )
+
+        // spec doesn't allow bare identifier in literal
+        val illegalBareIdentifierPattern: Capture<PsiElement> = psiElement(BARE_IDENTIFIER)
+            .withParent(psiElement<KdlPsiLiteral>())
+    }
+}
+
+private class WrapBareIdentifierIntention(element: PsiElement) : LocalQuickFixAndIntentionActionOnPsiElement(element) {
+
+    override fun getText(): String = KdlBundle.message("intention.bareIdentifierAsString")
+    override fun getFamilyName(): String = text
+
+    override fun invoke(
+        project: Project,
+        file: PsiFile,
+        editor: Editor?,
+        startElement: PsiElement,
+        endElement: PsiElement
+    ) {
+        KdlElementFactory.createStringLiteral(project, startElement.text)
+            .let { startElement.replace(it) }
+
+        FileEditorManager.getInstance(project)
+            .selectedTextEditor!!
+            .caretModel
+            .moveCaretRelatively(1, 0, false, false, false)
     }
 }

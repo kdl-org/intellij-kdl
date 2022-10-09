@@ -20,4 +20,7 @@ public interface KdlPsiLiteral extends KdlElement {
   @Nullable
   KdlPsiString getString();
 
+  @Nullable
+  PsiElement getBareIdentifier();
+
 }

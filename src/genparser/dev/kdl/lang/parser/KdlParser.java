@@ -114,12 +114,13 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // string | number | boolean | null
+  // string | BARE_IDENTIFIER | number | boolean | null
   public static boolean literal(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "literal")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, LITERAL, "<literal>");
     result_ = string(builder_, level_ + 1);
+    if (!result_) result_ = consumeToken(builder_, BARE_IDENTIFIER);
     if (!result_) result_ = number(builder_, level_ + 1);
     if (!result_) result_ = boolean_$(builder_, level_ + 1);
     if (!result_) result_ = null_$(builder_, level_ + 1);

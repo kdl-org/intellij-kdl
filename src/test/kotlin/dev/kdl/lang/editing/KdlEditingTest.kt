@@ -22,6 +22,7 @@ class KdlEditingTest : BasePlatformTestCase() {
     fun testUncommentNode() = doIntentionTest("Uncomment")
     fun testUncommentNodeChildren() = doIntentionTest("Uncomment")
     fun testUncommentProp() = doIntentionTest("Uncomment")
+    fun testWrapBareIdentifierInQuotes() = doIntentionTest("Wrap in quotes")
 
     private fun doEditingTest(characters: String) {
         myFixture.configureByFile(getBeforeFile())
