@@ -13,6 +13,7 @@ class KdlHighlighterTest : BasePlatformTestCase() {
     fun testIllegalComment() = doHighlightingTest()
     fun testIllegalBareIdentifier() = doHighlightingTest()
     fun testMissingNodeTerminator() = doHighlightingTest()
+    fun testUnbalancedHashes() = doHighlightingTest()
 
     private fun doHighlightingTest(checkWarnings: Boolean = true, checkInfos: Boolean = false, checkWeakWarnings: Boolean = true) {
         myFixture.testHighlighting(checkWarnings, checkInfos, checkWeakWarnings, "${getTestName(true)}.kdl")

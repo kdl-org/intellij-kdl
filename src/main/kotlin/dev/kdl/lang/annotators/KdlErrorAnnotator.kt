@@ -12,6 +12,7 @@ import com.intellij.patterns.PlatformPatterns.psiComment
 import com.intellij.patterns.PlatformPatterns.psiElement
 import com.intellij.patterns.PsiElementPattern.Capture
 import com.intellij.patterns.StandardPatterns.or
+import com.intellij.patterns.StandardPatterns.string
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
@@ -20,7 +21,9 @@ import dev.kdl.KdlBundle
 import dev.kdl.lang.psi.*
 import dev.kdl.lang.psi.ext.KdlElementTypes
 import dev.kdl.lang.psi.ext.KdlElementTypes.BARE_IDENTIFIER
+import dev.kdl.lang.psi.ext.KdlElementTypes.RAW_STRING_LITERAL
 import dev.kdl.lang.psiElement
+import java.util.regex.Pattern
 
 class KdlErrorAnnotator : Annotator {
 
@@ -48,6 +51,12 @@ class KdlErrorAnnotator : Annotator {
             holder.newSilentAnnotation(HighlightSeverity.ERROR)
                 .range((element as KdlPsiNodeBlock).identifier)
                 .tooltip(KdlBundle.message("annotator.missingTerminator"))
+                .create()
+        }
+        if (unbalancedHashesPattern.accepts(element)) {
+            holder.newSilentAnnotation(HighlightSeverity.ERROR)
+                .range(element)
+                .tooltip(KdlBundle.message("annotator.unbalancedHashes"))
                 .create()
         }
     }
@@ -86,6 +95,21 @@ class KdlErrorAnnotator : Annotator {
         // spec doesn't allow whitespace or empty node terminator
         val missingNodeTerminatorPattern: Capture<KdlPsiNodeBlock> = psiElement<KdlPsiNodeBlock>()
             .andNot(psiElement().withLastChild(psiElement<KdlPsiNodeTerminator>()))
+
+        // spec doesn't allow whitespace or empty node terminator
+        val unbalancedHashesPattern: Capture<PsiElement> = psiElement(RAW_STRING_LITERAL)
+            .withText(string().with(object : PatternCondition<String>("endsWith") {
+                val PATTERN = Pattern.compile("^r(?<starthash>#*)\".*\"(?<endhash>#*)$")
+                override fun accepts(str: String, context: ProcessingContext): Boolean {
+                    val matcher = PATTERN.matcher(str)
+                    if (!matcher.find()) {
+                        return false
+                    }
+                    val startHashes = matcher.group("starthash").length
+                    val endHashes = matcher.group("endhash").length
+                    return startHashes != endHashes
+                }
+            }))
     }
 }
 
