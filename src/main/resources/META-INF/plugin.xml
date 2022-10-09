@@ -17,7 +17,7 @@
         <colorSettingsPage implementation="dev.kdl.lang.highlighter.KdlColorSettingsPage"/>
         <annotator language="KDL" implementationClass="dev.kdl.lang.annotators.KdlItemCommentAnnotator"/>
 
-        <annotator language="KDL" implementationClass="dev.kdl.lang.annotators.KdlIllegalWhitespacesAnnotator"/>
+        <annotator language="KDL" implementationClass="dev.kdl.lang.annotators.KdlErrorAnnotator"/>
 
         <lang.foldingBuilder language="KDL" implementationClass="dev.kdl.lang.folding.KdlFoldingBuilder"/>
         <lang.braceMatcher language="KDL" implementationClass="dev.kdl.lang.braceMatcher.KdlBraceMatcher"/>

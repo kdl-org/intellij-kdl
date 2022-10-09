@@ -1,0 +1,5 @@
+node prop<error tooltip="Comment is not allowed here">/*comment*/</error>=<error tooltip="Comment is not allowed here">/*comment*/</error>"val"
+
+node (type)<error tooltip="Comment is not allowed here">/*comment*/</error>"val"
+
+(<error tooltip="Comment is not allowed here">/*comment*/</error>type<error tooltip="Comment is not allowed here">/*comment*/</error>)<error tooltip="Comment is not allowed here">/*comment*/</error>node
