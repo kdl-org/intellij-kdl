@@ -96,7 +96,7 @@ class KdlErrorAnnotator : Annotator {
         val missingNodeTerminatorPattern: Capture<KdlPsiNodeBlock> = psiElement<KdlPsiNodeBlock>()
             .andNot(psiElement().withLastChild(psiElement<KdlPsiNodeTerminator>()))
 
-        // spec doesn't allow whitespace or empty node terminator
+        // in some cases hashes can be unbalanced, spec doesn't allow that
         val unbalancedHashesPattern: Capture<PsiElement> = psiElement(RAW_STRING_LITERAL)
             .withText(string().with(object : PatternCondition<String>("endsWith") {
                 val PATTERN = Pattern.compile("^r(?<starthash>#*)\".*\"(?<endhash>#*)$")
