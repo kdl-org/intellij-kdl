@@ -15,7 +15,6 @@ import dev.kdl.lang.psi.KdlPsiNodeChildren
 class KdlFoldingBuilder: FoldingBuilderEx(), DumbAware {
 
     override fun buildFoldRegions(root: PsiElement, document: Document, quick: Boolean): Array<FoldingDescriptor> {
-
         val descriptors = PsiTreeUtil.findChildrenOfType(root, KdlPsiNodeChildren::class.java)
             .mapNotNull { node ->
                 val range = TextRange.create(node.startOffset, node.endOffset)
@@ -29,7 +28,7 @@ class KdlFoldingBuilder: FoldingBuilderEx(), DumbAware {
         return descriptors.toTypedArray()
     }
 
-    override fun getPlaceholderText(node: ASTNode): String = "..."
+    override fun getPlaceholderText(node: ASTNode): String = "{...}"
 
     override fun isCollapsedByDefault(node: ASTNode): Boolean = false
 }

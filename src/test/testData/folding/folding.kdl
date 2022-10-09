@@ -1,5 +1,5 @@
-node {<fold text='...'>
-    node2 {<fold text='...'>
+node <fold text='{...}'>{
+    node2 <fold text='{...}'>{
         test "a"
-    </fold>}
-</fold>}
+    }</fold>
+}</fold>
