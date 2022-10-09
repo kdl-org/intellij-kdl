@@ -1,4 +1,4 @@
-<idea-plugin>
+<idea-plugin url="https://github.com/Exidex/intellij-kdl">
     <id>dev.kdl</id>
     <name>KDL Document Language</name>
     <vendor url="https://kdl.dev/">KDL</vendor>
