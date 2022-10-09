@@ -21,6 +21,9 @@ public interface KdlPsiNodeBlock extends KdlCommentableItem {
   List<KdlPsiNodePropOrArg> getNodePropOrArgList();
 
   @Nullable
+  KdlPsiNodeTerminator getNodeTerminator();
+
+  @Nullable
   KdlPsiType getType();
 
   @Nullable

@@ -53,6 +53,12 @@ public class KdlPsiNodeBlockImpl extends KdlElementImpl implements KdlPsiNodeBlo
 
   @Override
   @Nullable
+  public KdlPsiNodeTerminator getNodeTerminator() {
+    return findChildByClass(KdlPsiNodeTerminator.class);
+  }
+
+  @Override
+  @Nullable
   public KdlPsiType getType() {
     return findChildByClass(KdlPsiType.class);
   }

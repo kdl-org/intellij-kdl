@@ -17,10 +17,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.util.ProcessingContext
 import dev.kdl.KdlBundle
-import dev.kdl.lang.psi.KdlElementFactory
-import dev.kdl.lang.psi.KdlPsiLiteral
-import dev.kdl.lang.psi.KdlPsiProp
-import dev.kdl.lang.psi.KdlPsiType
+import dev.kdl.lang.psi.*
 import dev.kdl.lang.psi.ext.KdlElementTypes
 import dev.kdl.lang.psi.ext.KdlElementTypes.BARE_IDENTIFIER
 import dev.kdl.lang.psiElement
@@ -45,6 +42,12 @@ class KdlErrorAnnotator : Annotator {
                 .range(element)
                 .tooltip(KdlBundle.message("annotator.bareIdentifierAsString"))
                 .withFix(WrapBareIdentifierIntention(element))
+                .create()
+        }
+        if (missingNodeTerminatorPattern.accepts(element)) {
+            holder.newSilentAnnotation(HighlightSeverity.ERROR)
+                .range((element as KdlPsiNodeBlock).identifier)
+                .tooltip(KdlBundle.message("annotator.missingTerminator"))
                 .create()
         }
     }
@@ -79,6 +82,10 @@ class KdlErrorAnnotator : Annotator {
         // spec doesn't allow bare identifier in literal
         val illegalBareIdentifierPattern: Capture<PsiElement> = psiElement(BARE_IDENTIFIER)
             .withParent(psiElement<KdlPsiLiteral>())
+
+        // spec doesn't allow whitespace or empty node terminator
+        val missingNodeTerminatorPattern: Capture<KdlPsiNodeBlock> = psiElement<KdlPsiNodeBlock>()
+            .andNot(psiElement().withLastChild(psiElement<KdlPsiNodeTerminator>()))
     }
 }
 

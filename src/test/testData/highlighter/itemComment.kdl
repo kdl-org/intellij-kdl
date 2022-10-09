@@ -2,7 +2,8 @@
   a
   b
   c
-}</info>
+}
+</info>
 
 mynode <info textAttributesKey="KDL_ITEM_COMMENT">/-"commented"</info> "not commented" <info textAttributesKey="KDL_ITEM_COMMENT">/-key="value"</info> <info textAttributesKey="KDL_ITEM_COMMENT">/-{
   a

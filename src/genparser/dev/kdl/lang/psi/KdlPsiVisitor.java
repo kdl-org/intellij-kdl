@@ -40,6 +40,10 @@ public class KdlPsiVisitor extends PsiElementVisitor {
     visitKdlCommentableItem(o);
   }
 
+  public void visitNodeTerminator(@NotNull KdlPsiNodeTerminator o) {
+    visitKdlElement(o);
+  }
+
   public void visitNull(@NotNull KdlPsiNull o) {
     visitKdlElement(o);
   }

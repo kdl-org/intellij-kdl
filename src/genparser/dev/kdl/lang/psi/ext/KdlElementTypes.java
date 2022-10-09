@@ -18,6 +18,7 @@ public interface KdlElementTypes {
   IElementType NODE_BLOCK = new KdlElementType("NODE_BLOCK");
   IElementType NODE_CHILDREN = new KdlElementType("NODE_CHILDREN");
   IElementType NODE_PROP_OR_ARG = new KdlElementType("NODE_PROP_OR_ARG");
+  IElementType NODE_TERMINATOR = new KdlElementType("NODE_TERMINATOR");
   IElementType NULL = new KdlElementType("NULL");
   IElementType NUMBER = new KdlElementType("NUMBER");
   IElementType PROP = new KdlElementType("PROP");
@@ -82,6 +83,9 @@ public interface KdlElementTypes {
       }
       else if (type == NODE_PROP_OR_ARG) {
         return new KdlPsiNodePropOrArgImpl(node);
+      }
+      else if (type == NODE_TERMINATOR) {
+        return new KdlPsiNodeTerminatorImpl(node);
       }
       else if (type == NULL) {
         return new KdlPsiNullImpl(node);

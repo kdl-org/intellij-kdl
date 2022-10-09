@@ -3,9 +3,9 @@ package dev.kdl.lang.formatter
 import com.intellij.formatting.*
 import com.intellij.lang.ASTNode
 import com.intellij.psi.formatter.common.AbstractBlock
+import dev.kdl.lang.children
 import dev.kdl.lang.parser.KdlParserDefinition.Companion.WHITESPACES
-import dev.kdl.lang.psi.ext.KdlElementTypes.NODE_BLOCK
-import dev.kdl.lang.psi.ext.KdlElementTypes.NODE_CHILDREN
+import dev.kdl.lang.psi.ext.KdlElementTypes.*
 
 class KdlBlock constructor(
     node: ASTNode,
@@ -15,7 +15,13 @@ class KdlBlock constructor(
 ) : AbstractBlock(node, wrap, null) {
 
     override fun buildChildren(): List<Block> {
-        return generateSequence({ myNode.firstChildNode }, { it.treeNext })
+        return myNode.children()
+            .flatMap { childNode ->
+                if (childNode.elementType == NODE_TERMINATOR) {
+                    return@flatMap childNode.children()
+                }
+                return@flatMap sequenceOf(childNode)
+            }
             .filter { childNode -> !WHITESPACES.contains(childNode.elementType) }
             .map { childNode ->
                 val (childIndent, currentWrap) = if (myNode.elementType === NODE_CHILDREN) {
