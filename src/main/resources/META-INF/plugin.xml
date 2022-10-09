@@ -5,6 +5,8 @@
 
     <depends>com.intellij.modules.platform</depends>
 
+    <resource-bundle>messages.KdlBundle</resource-bundle>
+
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="KDL"
                   extensions="kdl"
