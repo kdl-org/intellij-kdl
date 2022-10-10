@@ -18,7 +18,6 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
     override fun getHighlightingLexer(): Lexer = KdlSyntaxHighlighterLexer()
 
     override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> = when (tokenType) {
-        KdlElementTypes.BARE_IDENTIFIER -> BARE_IDENTIFIER_KEYS
         KdlElementTypes.COMMA -> COMMA_KEYS
         SEMI -> SEMICOLON_KEYS
         NULL_LITERAL, TRUE_LITERAL, FALSE_LITERAL -> KEYWORD_KEYS
@@ -28,15 +27,18 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
         MULTI_LINE_COMMENT -> BLOCK_COMMENT_KEYS
         SINGLE_LINE_COMMENT -> LINE_COMMENT_KEYS
         DECIMAL_LITERAL, HEX_LITERAL, OCTAL_LITERAL, BINARY_LITERAL -> NUMBER_KEYS
-        RAW_STRING_LITERAL, NOT_ESCAPE -> STRING_KEYS
+        RAW_STRING_LITERAL, BARE_IDENTIFIER -> STRING_KEYS
+        NOT_ESCAPE -> STRING_KEYS
         ESCAPE -> STRING_ESCAPE_SEQUENCE_KEYS
         TokenType.BAD_CHARACTER -> BAD_CHAR_KEYS
         else -> EMPTY_KEYS
     }
 
     companion object {
-        val KEYWORD = createTextAttributesKey("KDL_KEYWORD", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION)
-        val BARE_IDENTIFIER = createTextAttributesKey("KDL_IDENTIFIER", DefaultLanguageHighlighterColors.KEYWORD)
+        val KEYWORD = createTextAttributesKey("KDL_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
+        val IDENTIFIER = createTextAttributesKey("KDL_IDENTIFIER", DefaultLanguageHighlighterColors.INSTANCE_FIELD)
+        val PROPERTY_NAME = createTextAttributesKey("KDL_PROPERTY_NAME", DefaultLanguageHighlighterColors.NUMBER)
+        val TYPE = createTextAttributesKey("KDL_TYPE", DefaultLanguageHighlighterColors.NUMBER)
         val COMMA = createTextAttributesKey("KDL_COMMA", DefaultLanguageHighlighterColors.COMMA)
         val SEMICOLON = createTextAttributesKey("KDL_SEMICOLON", DefaultLanguageHighlighterColors.SEMICOLON)
         val PARENTHESES = createTextAttributesKey("KDL_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES)
@@ -52,7 +54,6 @@ class KdlSyntaxHighlighter : SyntaxHighlighterBase() {
 
         private val BAD_CHAR_KEYS = arrayOf(BAD_CHARACTER)
         private val KEYWORD_KEYS = arrayOf(KEYWORD)
-        private val BARE_IDENTIFIER_KEYS = arrayOf(BARE_IDENTIFIER)
         private val COMMA_KEYS = arrayOf(COMMA)
         private val SEMICOLON_KEYS = arrayOf(SEMICOLON)
         private val PARENTHESES_KEYS = arrayOf(PARENTHESES)

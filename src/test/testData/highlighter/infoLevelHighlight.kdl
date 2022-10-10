@@ -1,0 +1,11 @@
+<info textAttributesKey="KDL_ITEM_COMMENT">/-<info textAttributesKey="KDL_IDENTIFIER">mynode</info> "foo" <info textAttributesKey="KDL_PROPERTY_NAME">key</info>=1 {
+  <info textAttributesKey="KDL_IDENTIFIER">a</info>
+  <info textAttributesKey="KDL_IDENTIFIER">b</info>
+  <info textAttributesKey="KDL_IDENTIFIER">c</info>
+}
+</info>
+
+<info textAttributesKey="KDL_ITEM_COMMENT">/-<info textAttributesKey="KDL_IDENTIFIER">"commented"</info> <info textAttributesKey="KDL_ITEM_COMMENT">/-"commented"</info> "not commented" <info textAttributesKey="KDL_ITEM_COMMENT">/-<info textAttributesKey="KDL_PROPERTY_NAME">key</info>="value"</info> <info textAttributesKey="KDL_ITEM_COMMENT">/-{
+  <info textAttributesKey="KDL_IDENTIFIER">a</info>
+  <info textAttributesKey="KDL_IDENTIFIER">b</info>
+}</info></info>

@@ -7,8 +7,7 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase
 class KdlHighlighterTest : BasePlatformTestCase() {
     override fun getTestDataPath(): String = "src/test/testData/highlighter"
 
-    fun testItemComment() = doHighlightingTest(checkInfos = true)
-
+    fun testInfoLevelHighlight() = doHighlightingTest(checkInfos = true)
     fun testIllegalWhitespaces() = doHighlightingTest()
     fun testIllegalComment() = doHighlightingTest()
     fun testIllegalBareIdentifier() = doHighlightingTest()
