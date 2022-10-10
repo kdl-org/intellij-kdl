@@ -17,9 +17,7 @@
         <lang.syntaxHighlighterFactory language="KDL"
                                        implementationClass="dev.kdl.lang.highlighter.KdlSyntaxHighlighterFactory"/>
         <colorSettingsPage implementation="dev.kdl.lang.highlighter.KdlColorSettingsPage"/>
-        <annotator language="KDL" implementationClass="dev.kdl.lang.annotators.KdlItemCommentAnnotator"/>
-        <annotator language="KDL" implementationClass="dev.kdl.lang.annotators.KdlIdentifierAnnotator"/>
-
+        <annotator language="KDL" implementationClass="dev.kdl.lang.annotators.KdlInfoAnnotator"/>
         <annotator language="KDL" implementationClass="dev.kdl.lang.annotators.KdlErrorAnnotator"/>
 
         <lang.foldingBuilder language="KDL" implementationClass="dev.kdl.lang.folding.KdlFoldingBuilder"/>
