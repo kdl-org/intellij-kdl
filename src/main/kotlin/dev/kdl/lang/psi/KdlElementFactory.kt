@@ -13,8 +13,7 @@ object KdlElementFactory {
 
         val file = createFile(project, nodeString)
 
-        return file.findChildByClass(KdlPsiTopLevelNodeList::class.java)!!
-            .nodeBlockList
+        return file.findChildrenByClass(KdlPsiNodeBlock::class.java)
             .first()
             .nodePropOrArgList
             .first()

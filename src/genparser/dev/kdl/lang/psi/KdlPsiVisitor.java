@@ -60,10 +60,6 @@ public class KdlPsiVisitor extends PsiElementVisitor {
     visitKdlElement(o);
   }
 
-  public void visitTopLevelNodeList(@NotNull KdlPsiTopLevelNodeList o) {
-    visitKdlElement(o);
-  }
-
   public void visitType(@NotNull KdlPsiType o) {
     visitKdlElement(o);
   }

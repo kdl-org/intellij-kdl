@@ -2,6 +2,7 @@ package dev.kdl.lang.formatter
 
 import com.intellij.formatting.*
 import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiFile
 import com.intellij.psi.formatter.common.AbstractBlock
 import dev.kdl.lang.children
 import dev.kdl.lang.parser.KdlParserDefinition.Companion.WHITESPACES
@@ -44,8 +45,13 @@ class KdlBlock constructor(
             .toList()
     }
 
-    override fun getChildIndent(): Indent {
-        return Indent.getNormalIndent()
+    override fun getChildIndent(): Indent? {
+        if (myNode.elementType == NODE_CHILDREN) {
+            return Indent.getNormalIndent()
+        } else if (myNode.psi is PsiFile || myNode.treeParent?.psi is PsiFile) {
+            return Indent.getNoneIndent()
+        }
+        return null
     }
 
     override fun getIndent(): Indent {

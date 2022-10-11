@@ -23,7 +23,6 @@ public interface KdlElementTypes {
   IElementType NUMBER = new KdlElementType("NUMBER");
   IElementType PROP = new KdlElementType("PROP");
   IElementType STRING = new KdlElementType("STRING");
-  IElementType TOP_LEVEL_NODE_LIST = new KdlElementType("TOP_LEVEL_NODE_LIST");
   IElementType TYPE = new KdlElementType("TYPE");
   IElementType VALUE = new KdlElementType("VALUE");
 
@@ -98,9 +97,6 @@ public interface KdlElementTypes {
       }
       else if (type == STRING) {
         return new KdlPsiStringImpl(node);
-      }
-      else if (type == TOP_LEVEL_NODE_LIST) {
-        return new KdlPsiTopLevelNodeListImpl(node);
       }
       else if (type == TYPE) {
         return new KdlPsiTypeImpl(node);

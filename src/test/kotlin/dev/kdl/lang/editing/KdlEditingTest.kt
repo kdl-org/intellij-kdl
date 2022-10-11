@@ -14,6 +14,9 @@ class KdlEditingTest : BasePlatformTestCase() {
 
     fun testEnter1() = doEditingTest("\n")
     fun testEnter2() = doEditingTest("\n")
+    fun testEnter3() = doEditingTest("\n")
+    fun testEnter4() = doEditingTest("\n")
+    fun testEnter5() = doEditingTest("\n")
 
     fun testCommentLine() = doCommenterTest(CommentByLineCommentAction())
     fun testCommentMultiline() = doCommenterTest(CommentByBlockCommentAction())

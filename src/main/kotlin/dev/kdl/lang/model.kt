@@ -29,9 +29,9 @@ object KdlNullValue : KdlValue
 
 
 fun fromPsi(file: KdlPsiFile): KdlDocument? {
-    val psiNodes = file.findChildByClass(KdlPsiTopLevelNodeList::class.java) ?: return null
+    val psiNodes = file.findChildrenByClass(KdlPsiNodeBlock::class.java)
 
-    val nodes: List<KdlNode> = psiNodes.nodeBlockList
+    val nodes: List<KdlNode> = psiNodes
         .map { nodeFromPsiNodeBlock(it) ?: return null }
 
     return KdlDocument(nodes)

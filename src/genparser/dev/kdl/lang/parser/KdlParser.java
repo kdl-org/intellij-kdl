@@ -36,9 +36,9 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // top-level-node-list
+  // node-list
   static boolean File(PsiBuilder builder_, int level_) {
-    return top_level_node_list(builder_, level_ + 1);
+    return node_list(builder_, level_ + 1);
   }
 
   /* ********************************************************** */
@@ -628,17 +628,6 @@ public class KdlParser implements PsiParser, LightPsiParser {
     Marker marker_ = enter_section_(builder_, level_, _NONE_, STRING, "<string>");
     result_ = consumeToken(builder_, RAW_STRING_LITERAL);
     if (!result_) result_ = consumeToken(builder_, STRING_LITERAL);
-    exit_section_(builder_, level_, marker_, result_, false, null);
-    return result_;
-  }
-
-  /* ********************************************************** */
-  // node-list
-  public static boolean top_level_node_list(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "top_level_node_list")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, TOP_LEVEL_NODE_LIST, "<top level node list>");
-    result_ = node_list(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
   }

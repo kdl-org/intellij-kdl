@@ -57,18 +57,16 @@
     ]
 }
 
-File ::= top-level-node-list
+File ::= node-list
 
-top-level-node-list ::= node-list
-
-node-block ::= ('/-' node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator?
+node-block ::= ('/-' node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator? // terminator is not optional
 node-prop-or-arg ::= ('/-' node-space*)? (prop | arg)
 node-children ::= ('/-' node-space*)? '{' node-children-inner? '}' { pin=2 }
 
 node-terminator ::= NEWLINE | ';' | <<eof>>
 
 private node-children-inner ::= !'}' node-list &'}' { pin=1 recoverWhile=node-children-recover }
-private node-list ::= linespace* (node-block linespace*)* // terminator is not optional
+private node-list ::= linespace* (node-block linespace*)*
 private node-children-recover ::= !'}'
 
 private node-space ::= ws* escline ws* | ws+
