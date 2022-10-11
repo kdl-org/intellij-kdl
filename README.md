@@ -1,14 +1,12 @@
 # Intellij KDL
 
 ![Build](https://github.com/kdl-org/intellij-kdl/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/20136.svg)](https://plugins.jetbrains.com/plugin/20136)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/20136.svg)](https://plugins.jetbrains.com/plugin/20136)
 
 ![demo](images/demo.png)
 
 ## ToDo list
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the Plugin ID in the above README badges.
 - [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html).
 
 <!-- Plugin description -->
