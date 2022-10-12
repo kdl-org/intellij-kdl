@@ -14,4 +14,9 @@ class KdlFormatterTest : FormatterTestCase() {
 
     fun test1() = doTest()
     fun test2() = doTest()
+    fun testAfterNodeName() = doTest()
+    fun testAroundPropEq() = doTest()
+    fun testBeforeChildrenBlock() = doTest()
+    fun testBetweenTypeAndLiteral() = doTest()
+    fun testInsideType() = doTest()
 }

@@ -3,7 +3,7 @@ package dev.kdl.lang.formatter
 import com.intellij.formatting.*
 import com.intellij.psi.codeStyle.CodeStyleSettings
 import dev.kdl.lang.KdlLanguage
-import dev.kdl.lang.psi.ext.KdlElementTypes.IDENTIFIER
+import dev.kdl.lang.psi.ext.KdlElementTypes.*
 
 class KdlFormattingModelBuilder : FormattingModelBuilder {
     override fun createModel(formattingContext: FormattingContext): FormattingModel {
@@ -22,6 +22,10 @@ class KdlFormattingModelBuilder : FormattingModelBuilder {
 
     private fun createSpaceBuilder(settings: CodeStyleSettings): SpacingBuilder {
         return SpacingBuilder(settings, KdlLanguage)
-            .after(IDENTIFIER).spaces(1)
+            .afterInside(IDENTIFIER, NODE_BLOCK).spaces(1)
+            .beforeInside(NODE_CHILDREN, NODE_BLOCK).spaces(1)
+            .betweenInside(TYPE, LITERAL, VALUE).none()
+            .withinPairInside(L_PAREN, R_PAREN, TYPE).none()
+            .aroundInside(EQ, PROP).none()
     }
 }
