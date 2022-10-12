@@ -6,9 +6,6 @@
 
 ![demo](images/demo.png)
 
-## ToDo list
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html).
-
 <!-- Plugin description -->
 
 IntelliJ Platform plugin with language support for [The KDL Document Language](https://kdl.dev/)
