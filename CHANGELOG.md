@@ -1,6 +1,8 @@
 # intellij-kdl Changelog
 
 ## [Unreleased]
+
+## [1.0.1]
 ### Added
 - 2022.3 compatibility
 
