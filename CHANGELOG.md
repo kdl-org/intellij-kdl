@@ -1,6 +1,8 @@
 # intellij-kdl Changelog
 
 ## [Unreleased]
+
+## [2.0.0]
 ### Added
 - 2023.1 and 2023.2 compatibility
 - Minimal required version is now 2022.3
