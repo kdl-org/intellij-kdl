@@ -8,7 +8,7 @@ import dev.kdl.lang.children
 import dev.kdl.lang.parser.KdlParserDefinition.Companion.WHITESPACES
 import dev.kdl.lang.psi.ext.KdlElementTypes.*
 
-class KdlBlock constructor(
+class KdlBlock(
     node: ASTNode,
     wrap: Wrap?,
     private val indent: Indent,

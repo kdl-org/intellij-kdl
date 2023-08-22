@@ -1,4 +1,4 @@
-package dev.kdl.lang.highlighter;
+package dev.kdl.lang.highlighter
 
 import com.intellij.lexer.LayeredLexer
 import com.intellij.psi.tree.IElementType
