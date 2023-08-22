@@ -12,7 +12,7 @@ plugins {
     id("org.jetbrains.intellij") version "1.9.0"
     id("org.jetbrains.changelog") version "1.3.1"
     id("org.jetbrains.qodana") version "0.1.13"
-    id("org.jetbrains.grammarkit") version "2021.2.2"
+    id("org.jetbrains.grammarkit") version "2022.3.1"
     id("org.ajoberstar.grgit") version "5.0.0"
 }
 
@@ -25,7 +25,7 @@ repositories {
 
 kotlin {
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
@@ -114,21 +114,21 @@ sourceSets {
 }
 
 val generateKdlLexer = task<GenerateLexerTask>("generateKdlLexer") {
-    source.set("src/main/grammars/KdlLexer.flex")
+    sourceFile.set(file("src/main/grammars/KdlLexer.flex"))
     targetDir.set("src/genparser/dev/kdl/lang/lexer")
     targetClass.set("KdlLexer")
     purgeOldFiles.set(true)
 }
 
 val generateKdlStringLexer = task<GenerateLexerTask>("generateKdlStringLexer") {
-    source.set("src/main/grammars/KdlStringLexer.flex")
+    sourceFile.set(file("src/main/grammars/KdlStringLexer.flex"))
     targetDir.set("src/genparser/dev/kdl/lang/escape")
     targetClass.set("KdlStringLexer")
     purgeOldFiles.set(true)
 }
 
 val generateKdlParser = task<GenerateParserTask>("generateKdlParser") {
-    source.set("src/main/grammars/KdlParser.bnf")
+    sourceFile.set(file("src/main/grammars/KdlParser.bnf"))
     targetRoot.set("src/genparser")
     pathToParser.set("dev/kdl/lang/parser/KdlParser.java")
     pathToPsiRoot.set("dev/kdl/lang/psi")

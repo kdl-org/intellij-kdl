@@ -23,7 +23,7 @@ object KdlElementFactory {
             .string!!
     }
 
-    fun createFile(project: Project, text: String): KdlPsiFile {
+    private fun createFile(project: Project, text: String): KdlPsiFile {
         return PsiFileFactory.getInstance(project)
             .createFileFromText("dummy.kdl", KdlFileType, text) as KdlPsiFile
     }
