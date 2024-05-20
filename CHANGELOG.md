@@ -1,6 +1,7 @@
 # intellij-kdl Changelog
 
 ## [Unreleased]
+- Removed upper Intellij version restriction x2
 
 ## [2.1.0]
 ### Changed
